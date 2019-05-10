@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <script>
+      var locale = '<%= I18n.locale %>';
+    </script>
+    <%= stylesheet_link_tag    'application', media: 'all',
+                               'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
+    <% if yield(:title).present? %>
+      <div class="inner-headline">
+        <div class="container">
+          <h2><%= yield(:title) %></h2>
+        </div>
+      </div>
+    <% end %>
+    <div class="container">
+      <%= render 'shared/alerts' %>
+      <%= yield %>
+    </div>
+    <%= render 'layouts/footer' %>
+    <div class="container">
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<% provide(:title, t('Check attendance')) %>
+
+<%= form_tag create_attendance_url do %>
+  <%= hidden_field_tag :group_id, @group.id %>
+  <%= hidden_field_tag :lesson_time, @lesson_time  %>
+  <%= hidden_field_tag :lesson_id, @lesson.id  %>
+  <% @group.users.with_role(:student).each do |user| %>
+    <div class="form-group row">
+      <%= check_box_tag 'students[]', user.id, @present_users.include?(user), class:"form-check-input" %>
+      <%= label_tag 'students[]', user.full_name, class:"form-check-label" %>
+    </div>
+  <% end %>
+  <%= submit_tag t('Save'), class: "btn btn-primary" %>
+<% end %>

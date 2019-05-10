@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  group: one
+  time: 2019-04-04 11:23:42
+
+two:
+  user: two
+  group: two
+  time: 2019-04-04 11:23:42

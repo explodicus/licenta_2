@@ -1,0 +1,84 @@
+<% provide(:title, t('Edit group')) %>
+
+<%= form_for(@group) do |f| %>
+  <%= render 'devise/shared/error_messages', resource: @group %>
+
+  <div class="form-group row">
+    <%= f.label :name, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: t("Group name") %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :kind, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.select :kind, [[t('Academic'), 'Academic'], [t('Weekend'), 'Weekend'], [t('Vacation'), 'Vacation'], [t('International'), 'International']], {}, class: 'custom-select'%>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :users, t("Remove teachers"), class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-3">
+      <%= f.select :users, options_for_select(@group.users.with_role(:teacher).order(last_name: :asc, first_name: :asc).collect { | u | [u.full_name, u.id] }), {}, { :multiple => true, class: 'custom-select'} %>
+    </div>
+
+  <%= f.label :users, t("Add teachers"), class:"col-sm-3 col-form-label" %>
+  <div class="col-sm-3">
+    <%= f.select :users, options_for_select((User.with_role(:teacher).order(last_name: :asc, first_name: :asc) - @group.users.with_role(:teacher)).collect { | u | [u.full_name, u.id] }), {}, { :multiple => true, class: 'custom-select'} %>
+  </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :users, t("Remove students"), class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-3">
+      <%= f.select :users, options_for_select(@group.users.with_role(:student).order(last_name: :asc, first_name: :asc).collect { | u | [u.full_name, u.id] }), {}, { :multiple => true,  class: 'custom-select'} %>
+    </div>
+    <%= f.label :users, t("Add students"), class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-3">
+      <%= f.select :users, options_for_select((User.with_role(:student).order(last_name: :asc, first_name: :asc) - @group.users.with_role(:student)).collect { | u | [u.full_name, u.id] }), {}, { :multiple => true,  class: 'custom-select'} %>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <%= f.label :price, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9 input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">MDL</span>
+      </div>
+      <%= f.text_field :price, class: 'form-control', type:'number' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-9">
+      <%= f.check_box :active,  class:"form-check-input"%>
+      <%= f.label :active, class:"form-check-label" %>
+
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :expiration_date, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.date_select :expiration_date, {order: [:day, :month, :year],
+                                           prompt: { day: t('Select day'), month: t('Select month'), year: t('Select year') },
+                                           start_year: Date.today.year, end_year: Date.today.year + 10}, class: 'custom-select col-sm-3' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :notes, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_area :notes, class: 'form-control', placeholder: t('Notes') %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t("Update group"), class: 'btn btn-primary'%>
+  </div>
+
+<% end %>

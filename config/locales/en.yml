@@ -1,0 +1,175 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  activerecord:
+    attributes:
+      group:
+        kind: Group type
+        name: Group name
+      vacation:
+        name: Vacation name
+        kind: Vacation for
+      post:
+        short_content: Short version
+  Help: 'Help'
+  About: 'About'
+  Contact: 'Contact'
+  Profile: 'Profile'
+  Check attendance: 'Check attendance'
+  Save: 'Save'
+  Search attendance: 'Search attendance'
+  Select group: 'Select group'
+  Time: 'Time'
+  Date: 'Date'
+  Search: 'Search'
+  Group was deleted: 'Group was deleted'
+  Lesson was deleted: 'Lesson was deleted'
+  No lesson was found: 'No lesson was found'
+  Error finding the right lesson: 'Error finding the right lesson'
+  Attendances registered: 'Attendances registered'
+  Current password: 'Current password'
+  Password: 'Password'
+  Password confirmation: 'Password confirmation'
+  Edit child profile: 'Edit child profile'
+  First name: 'First name'
+  Last name: 'Last name'
+  Phone number: 'Phone number'
+  Preferred language: 'Preferred language'
+  Select day: 'Select day'
+  Select month: 'Select month'
+  Select year: 'Select year'
+  we need your current password to confirm your changes: we need your current password to confirm your changes
+  Child sign up: 'Child sign up'
+  Sign up: 'Sign up'
+  Make full account: 'Make full account'
+  Child's email: "Child's email"
+  Child's phone number: "Child's phone number"
+  Child's password: "Child's password"
+  Parent's password: "Parent's password"
+  Wrong password: 'Wrong password'
+  Child profile updated: 'Child profile updated'
+  Full account created. To start using it, please follow the instructions sent to your email.: 'Full account created. To start using it, please follow the instructions sent to your email.'
+  Edit group: 'Edit group'
+  The form contains: 'The form contains'
+  Group name: 'Group name'
+  Remove teachers: 'Remove teachers'
+  Add teachers: 'Add teachers'
+  Remove students: 'Remove students'
+  Add students: 'Add students'
+  Active: 'Active'
+  Expiration date: 'Expiration date'
+  Notes: 'Notes'
+  Update group: 'Update group'
+  Academic: 'Academic'
+  Vacation: 'Vacation'
+  Weekend: 'Weekend'
+  International: 'International'
+  All groups: 'All groups'
+  New group: 'New group'
+  Teachers: 'Teachers'
+  Students: 'Students'
+  Create group: 'Create group'
+  Group info: 'Group info'
+  In vacation: 'In vacation'
+  Last update: 'Last update'
+  Created on: 'Created on'
+  No notes: 'No notes'
+  Timetable: 'Timetable'
+  Day: 'Day'
+  New lesson: 'New lesson'
+  Week day: 'Week day'
+  Start time: 'Start time'
+  End time: 'End time'
+  Delete group: 'Delete group'
+  Edit vacation: 'Edit vacation'
+  Vacation name: 'Vacation name'
+  Update vacation: 'Update vacation'
+  All vacations: 'All vacations'
+  Type: 'Type'
+  Start date: 'Start date'
+  End date: 'End date'
+  Status: 'Status'
+  Delete vacation: 'Delete vacation'
+  New vacation: 'New vacation'
+  Create vacation: 'Create vacation'
+  Date of birth: 'Date of birth'
+  Discount: 'Discount'
+  Groups: 'Groups'
+  Edit account: 'Edit account'
+  Approve account: 'Approve account'
+  Remove admin: 'Remove admin'
+  Make admin: 'Make admin'
+  Remove teacher: 'Remove teacher'
+  Make teacher: 'Make teacher'
+  Remove editor: 'Remove editor'
+  Make editor: 'Make editor'
+  Pending approval: 'Pending approval'
+  Parent's email: "Parent's email"
+  Romanian: 'Romanian'
+  Russian: 'Russian'
+  English: 'English'
+  Users: 'Users'
+  Vacations: 'Vacations'
+  Attendances: 'Attendances'
+  Manage your children's accounts: "Manage your children's accounts"
+  Mark attendance: "Mark attendance"
+  News: 'News'
+  Title: 'Title'
+  Short version: 'Short version'
+  Content: 'Content'
+  Post: 'Post'
+  New post: 'New post'
+  Set discount: 'Set discount'
+  User updated: 'User updated'
+  Group updated: 'Group updated'
+  Settings: 'Settings'
+  Discount has to be a percentage: 'Discount has to be a percentage'
+  Academic program: 'Academic program'
+  English courses: 'English courses'
+  Performance: 'Performance'
+  Weekend school: 'Weekend school'
+  Vacation school: 'Vacation school'
+  Getting ready for school: 'Getting ready for school'
+  International camps: 'International camps'
+  UK: 'United Kingdom'
+  Germany: 'Germany'
+  France: 'France'
+  Study abroad: 'Study abroad'
+  Register child: 'Register child'
+  Log out: 'Log out'
+  Login: 'Login'
+  Edit post: 'Edit post'
+  Teacher: 'Teacher'
+  Price: 'Price'
+  Are you sure you want to delete this post?: 'Are you sure you want to delete this post?'
+  Are you sure you want to delete this group?: 'Are you sure you want to delete this group?'
+  Are you sure you want to delete this vacation?: 'Are you sure you want to delete this vacation?'

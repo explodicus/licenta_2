@@ -1,0 +1,63 @@
+<% provide(:title, t('All vacations')) %>
+
+<br>
+
+<table class="table table-hover" id="datatable">
+  <thead>
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col"><%= t('Vacation name') %></th>
+    <th scope="col"><%= t('Type') %></th>
+    <th scope="col"><%= t('Start date') %></th>
+    <th scope="col"><%= t('End date') %></th>
+    <th scope="col"><%= t('Status') %></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @vacations.each do |vacation| %>
+    <tr>
+      <th scope="row">
+        <%= vacation.id %>
+      </th>
+      <td>
+        <%= vacation.name %>
+      </td>
+      <td>
+        <%= t(vacation.kind) %>
+      </td>
+      <td>
+        <%= vacation.start_date.strftime("%d.%m.%Y") %>
+      </td>
+      <td>
+        <%= vacation.end_date.strftime("%d.%m.%Y") %>
+      </td>
+      <td>
+        <% if Date.today < vacation.start_date %>
+          <i class="material-icons">
+            check_circle_outline
+          </i>
+        <% elsif Date.today <= vacation.end_date %>
+          <i class="material-icons">
+            sync
+          </i>
+        <% else %>
+          <i class="material-icons">
+            cancel
+          </i>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to t("Edit vacation"), edit_vacation_path(vacation), class: "btn btn-light" %>
+      </td>
+      <td>
+        <%= link_to t("Delete vacation"), vacation, method: :delete, data: {confirm: t("Are you sure you want to delete this vacation?")}, class: "btn btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+
+  <%= link_to t("New vacation"), new_vacation_path, class: "btn btn-light btn-right" %>
+

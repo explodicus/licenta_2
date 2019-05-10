@@ -1,0 +1,40 @@
+<table class="table table-hover" id="datatable">
+  <thead>
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col"><%= t('Last name') %></th>
+    <th scope="col"><%= t('First name') %></th>
+    <th scope="col"><%= t('Date of birth') %></th>
+    <th scope="col"><%= t('Phone number') %></th>
+    <th scope="col"><%= t('Preferred language') %></th>
+    <th scope="col"><%= t('Discount') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <th scope="row">
+        <%= user.id %>
+      </th>
+      <td>
+        <%= link_to user.last_name, user %>
+      </td>
+      <td>
+        <%= link_to user.first_name, user %>
+      </td>
+      <td>
+        <%= user.date_of_birth.strftime("%d.%m.%Y") %>
+      </td>
+      <td>
+        <%= user.phone_number %>
+      </td>
+      <td>
+        <%= t(user.preferred_language) %>
+      </td>
+      <td>
+        <%= user.discount %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

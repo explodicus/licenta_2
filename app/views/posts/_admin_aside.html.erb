@@ -1,0 +1,45 @@
+<h5 class="title"><%= link_to t("Groups"), groups_path %></h5>
+<ul>
+  <li>
+    <i class="material-icons">
+      navigate_next
+    </i>
+    <%= link_to t("New group"), new_group_path %>
+  </li>
+</ul>
+
+<h5 class="title"><%= t('Users') %></h5>
+<ul>
+  <li>
+    <i class="material-icons">
+      navigate_next
+    </i>
+    <%= link_to t("Teachers"), teachers_users_path %>
+  </li>
+  <li>
+    <i class="material-icons">
+      navigate_next
+    </i>
+    <%= link_to t("Students"), students_users_path %>
+  </li>
+  <% if User.where('admin_confirmed = false AND (confirmed_at IS NOT NULL OR parent_id IS NOT NULL)').count > 0 %>
+    <li>
+      <i class="material-icons">
+        navigate_next
+      </i>
+      <%= link_to t("Pending approval"), pending_approval_users_path %>
+    </li>
+  <% end %>
+</ul>
+
+<h5 class="title"><%= link_to t("Vacations"), vacations_path %></h5>
+<ul>
+  <li>
+    <i class="material-icons">
+      navigate_next
+    </i>
+    <%= link_to t("New vacation"), new_vacation_path %>
+  </li>
+</ul>
+
+<h5 class="title"><%= link_to t("Attendances"), search_attendance_path %></h5>

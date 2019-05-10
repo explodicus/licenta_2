@@ -1,0 +1,46 @@
+<table class="table table-hover" id="datatable">
+  <thead>
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col"><%= t("Group name") %></th>
+    <th scope="col"><%= t("Type") %></th>
+    <th scope="col"><%= t('Teacher') %></th>
+    <th scope="col"><%= t("Price") %></th>
+    <th scope="col"><%= t("Active") %></th>
+    <th scope="col"><%= t('In vacation') %></th>
+    <th scope="col"><%= t("Created on") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% groups.each do |group| %>
+    <tr>
+      <th scope="row">
+        <%= group.id %>
+      </th>
+      <td>
+        <%= link_to group.name, group  %>
+      </td>
+      <td>
+        <%= group.kind %>
+      </td>
+      <td>
+        <% user = group.users.with_role(:teacher).first %>
+        <% if user %>
+          <%= user.full_name %>
+        <% end %>
+      </td>
+      <td>
+        <%= group.price %>
+      </td>
+      <td>
+        <%= render partial: 'groups/active_icon', locals: { value: group.active } %>
+      </td>
+      <td>
+        <%= render partial: 'groups/active_icon', locals: { value: group.in_vacation } %>
+      </td>
+      <td>
+        <%= group.created_at.strftime("%d.%m.%Y") %>
+      </td>
+    </tr>
+  <% end %>
+  </table>

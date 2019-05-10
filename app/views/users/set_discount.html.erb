@@ -1,0 +1,23 @@
+<% provide(:title, t('Set discount')) %>
+
+<br>
+
+<%= form_for(@user, url: update_discount_user_url, method: :put) do |f|  %>
+<%= render "devise/shared/error_messages", resource: @user %>
+
+  <div class="form-group row">
+    <%= f.label :discount, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9 input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">%</span>
+      </div>
+      <%= f.text_field :discount, class: 'form-control', type:'number', value: @user.discount_percentage %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update", class:'btn btn-primary' %>
+  </div>
+<% end %>
+
+

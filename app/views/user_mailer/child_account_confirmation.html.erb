@@ -1,0 +1,9 @@
+<h1>ISCEO</h1>
+
+<p>Hi <%= @user.full_name %>,</p>
+
+<p>
+  Your child's account was successfully reviewed by an administrator. You can manage it from your own account:
+</p>
+
+<%= link_to "Log in", new_user_session_url %>

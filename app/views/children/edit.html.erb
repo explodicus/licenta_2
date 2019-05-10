@@ -1,0 +1,45 @@
+<% provide(:title, t('Edit child profile')) %>
+
+<br>
+
+<%= form_for(@user, url: child_url, method: :put) do |f| %>
+  <%= render 'devise/shared/error_messages', resource: @user %>
+
+  <div class="form-group row">
+    <%= f.label :first_name, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: t("First name") %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :last_name, class:"col-sm-3 col-form-label"  %>
+    <div class="col-sm-9">
+      <%= f.text_field :last_name, class: 'form-control', placeholder: t("Last name") %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :date_of_birth, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.date_select :date_of_birth, {order: [:day, :month, :year],
+                                         prompt: { day: t('Select day'), month: t('Select month'), year: t('Select year') },
+                                         start_year: Date.today.year - 5, end_year: Date.today.year - 100}, class: 'custom-select col-sm-3' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <%= label_tag :current_password, t('Current password'), class:"col-form-label" %><br>
+      <i>(<%= t('we need your current password to confirm your changes') %>)</i>
+    </div>
+    <div class="col-sm-9">
+      <%= password_field_tag :current_password, '', class: 'form-control', placeholder: t("Current password") %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t("Save"), class: 'btn btn-primary'%>
+  </div>
+<% end %>
+<br>

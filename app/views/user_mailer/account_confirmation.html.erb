@@ -1,0 +1,9 @@
+<h1>ISCEO</h1>
+
+<p>Hi <%= @user.full_name %>,</p>
+
+<p>
+Your account was successfully reviewed by an administrator. You can now log in here:
+</p>
+
+<%= link_to "Log in", new_user_session_url %>

@@ -1,0 +1,40 @@
+<% provide(:title, t('New post')) %>
+
+<%= form_for(@post) do |f| %>
+  <%= render 'devise/shared/error_messages', resource: @post %>
+
+  <div class="form-group row">
+    <%= f.label :title, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :title, autofocus: true, class: 'form-control', placeholder: t("Title") %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :short_content, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_area :short_content, class: 'form-control', placeholder: t("Short version") %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :content, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_area :content, class: 'form-control', placeholder: t("Content") %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :image, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <div class="custom-file">
+        <%= f.file_field :image, accept: 'image/jpeg,image/jpg,image/gif,image/png'%>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t("Post"), class: 'btn btn-primary'%>
+  </div>
+
+<% end %>

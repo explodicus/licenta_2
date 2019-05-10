@@ -1,0 +1,25 @@
+<% provide(:title, t('Search attendance')) %>
+
+<%= form_tag found_attendance_url do %>
+
+  <div class="form-group row">
+    <%= label_tag :group_id, t('Select group'), class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= select_tag :group_id, options_for_select(Group.order('name ASC').collect { | g | [g.name, g.id] }), class: 'custom-select' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= label_tag :time, t('Time'), class:"col-sm-1 col-form-label" %>
+    <div class="col-sm-3">
+      <%= time_select :time, {}, {minute_step: 15, start_hour: 8, end_hour: 20}, class: 'custom-select', style: 'width:45%' %>
+    </div>
+    <%= label_tag :date, t('Date'), class:"col-sm-1 col-form-label" %>
+    <div class="col-sm-7">
+      <%= date_select :date, {}, {order: [:day, :month, :year],
+                              start_year: Date.today.year, end_year: 2012}, class: 'custom-select', style: 'width:32%' %>
+    </div>
+  </div>
+
+  <%= submit_tag t("Search"), class: "btn btn-primary" %>
+<% end %>

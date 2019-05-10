@@ -1,0 +1,13 @@
+<h5 class="title"><%= t("Manage your children's accounts") %></h5>
+<ul>
+<% current_user.children.each do |user| %>
+    <% if user.admin_confirmed %>
+      <li>
+        <i class="material-icons">
+          navigate_next
+        </i>
+        <%= link_to "#{user.full_name}", user %>
+      </li>
+    <% end %>
+<% end %>
+</ul>

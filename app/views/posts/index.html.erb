@@ -1,0 +1,37 @@
+<% provide(:title, t('News')) %>
+
+<div class="row">
+  <div class="col-sm-4 sidebar">
+    <button type="button" class="btn btn-primary">
+      Notifications <span class="badge badge-light"><%= current_user.notifications.count %></span>
+    </button>
+    <% if current_user.has_role? :admin %>
+      <%= render 'admin_aside' %>
+    <% end %>
+    <% if current_user.has_role? :teacher %>
+      <%= render 'teacher_aside' %>
+    <% end %>
+    <% if (current_user.has_role? :parent) && current_user.has_confirmed_children? %>
+      <%= render 'parent_aside' %>
+    <% end %>
+    <% if current_user.has_role? :student %>
+      <%= render 'student_aside' %>
+    <% end %>
+  </div>
+
+  <div class="col-sm-8">
+    <% @posts.each do |post| %>
+    <article>
+      <h4 class="title"><%=link_to post.title, post %></h4>
+      <%=image_tag post.image.url, class: 'img-fluid', style: 'height: auto; width: 100%; display: block;' if post.image? %>
+      <%= post.short_content %>
+    </article>
+      <br>
+    <% end %>
+    <% if current_user.editor? %>
+      <%= link_to t("New post"), new_post_path, class: "btn btn-primary", style: "text-align: right; float: right; margin: 0px 5px"  %>
+    <% end %>
+  </div>
+
+  <%= will_paginate %>
+ </div>

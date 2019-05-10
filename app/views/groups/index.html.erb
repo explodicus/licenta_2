@@ -1,0 +1,7 @@
+<% provide(:title, t('All groups')) %>
+
+<%= render partial: 'shared/group_table', locals: { groups: @groups}%>
+<div class="row btn-row">
+  <div class="col-sm-10"></div>
+  <%= link_to t("New group"), new_group_path, class: "col-sm-2 btn btn-light" %>
+</div>

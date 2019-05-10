@@ -1,0 +1,44 @@
+<% provide(:title, t('Edit vacation')) %>
+
+<br>
+
+<%= form_for(@vacation) do |f| %>
+  <%= render 'devise/shared/error_messages', resource: @vacation %>
+
+  <div class="form-group row">
+    <%= f.label :name, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: t("Vacation name") %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :kind, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.select :kind, [[t('Academic'), 'Academic'], [t('Weekend'), 'Weekend'], [t('Vacation'), 'Vacation'], [t('International'), 'International']], {}, class: 'custom-select'%>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :start_date, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.date_select :start_date, {order: [:day, :month, :year],
+                                      prompt: { day: t('Select day'), month: t('Select month'), year: t('Select year') },
+                                      start_year: Date.today.year + 5, end_year: Date.today.year - 10}, class: 'custom-select col-sm-3' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :end_date, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.date_select :end_date, {order: [:day, :month, :year],
+                                    prompt: { day: t('Select day'), month: t('Select month'), year: t('Select year') },
+                                    start_year: Date.today.year + 5, end_year: Date.today.year - 10}, class: 'custom-select col-sm-3' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t("Update vacation"), class: 'btn btn-primary'%>
+  </div>
+
+<% end %>

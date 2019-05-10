@@ -1,0 +1,76 @@
+<% provide(:title, t('Profile')) %>
+
+<h1><%= @user.full_name %></h1>
+<br>
+<div class="user_info row">
+  <h5 class="col-sm-3"><%= t('Date of birth') %></h5>
+  <div class="col-sm-3"><%= @user.date_of_birth.strftime("%d.%m.%Y") %></div>
+  <% if @user.child? %>
+    <h5 class="col-sm-3"><%= t("Parent's email") %></h5>
+    <div class="col-sm-3"><%= @user.parent.email %></div>
+  <% else %>
+    <h5 class="col-sm-3">Email</h5>
+    <div class="col-sm-3"><%= @user.email %></div>
+  <% end %>
+</div>
+<br>
+<div class="user_info row">
+  <h5 class="col-sm-3"><%= t('Preferred language') %></h5>
+  <div class="col-sm-3"><%= @user.preferred_language %></div>
+  <h5 class="col-sm-3"><%= t('Phone number') %></h5>
+  <div class="col-sm-3"><%= @user.phone_number %></div>
+</div>
+<br>
+
+<% if current_user.has_role? :admin %>
+  <div class="user_info row">
+    <h5 class="col-sm-3"><%= t('Discount') %></h5>
+    <div class="col-sm-3"><%= "#{@user.discount_percentage}%" %></div>
+    <h5 class="col-sm-3">id</h5>
+    <div class="col-sm-3"><%= @user.id %></div>
+  </div>
+  <br>
+<% end %>
+<h4><%= t('Groups') %></h4>
+<%= render partial: 'shared/group_table', locals: {groups: @user.groups} %>
+<% if @user.lessons.count > 0 %>
+  <%= render partial: 'shared/timetable', locals: { timetable: @user.lessons, user: @user.id } %>
+<% end %>
+
+<div class="row btn-row">
+  <% if current_user.children.include?(@user) %>
+      <%= link_to t("Make full account"), new_full_child_path(@user), class: "btn btn-primary col-sm-2" %>
+      <%= link_to t("Edit account"), edit_child_path(@user), class: "btn btn-primary col-sm-2" %>
+  <% end %>
+
+  <% if current_user.admin? %>
+    <% if !@user.admin_confirmed %>
+        <%= link_to t("Approve account"), approve_user_path(@user), class: "btn btn-primary col-sm-2" %>
+    <% elsif !@user.child? %>
+      <% if (@user.admin?) && (current_user != @user) %>
+        <%= link_to t("Remove admin"), remove_admin_user_path, class: "btn btn-danger col-sm-2" %>
+      <% elsif current_user != @user %>
+        <%= link_to t("Make admin"), make_admin_user_path(@user), class: "btn btn-primary col-sm-2" %>
+      <% end %>
+      <% if (@user.teacher?) %>
+        <%= link_to t("Remove teacher"), remove_teacher_user_path(@user), class: "btn btn-danger col-sm-2" %>
+      <% else %>
+        <%= link_to t("Make teacher"), make_teacher_user_path(@user), class: "btn btn-primary col-sm-2" %>
+      <% end %>
+      <% if (@user.editor?) %>
+        <%= link_to t("Remove editor"), remove_editor_user_path(@user), class: "btn btn-danger col-sm-2" %>
+      <% else %>
+        <%= link_to t("Make editor"), make_editor_user_path(@user), class: "btn btn-primary col-sm-2" %>
+      <% end %>
+      <%= link_to t("Set discount"), set_discount_user_path(@user), class: "btn btn-primary col-sm-2" %>
+      <div class="col-sm-1"></div>
+      <% if @user.teacher? %>
+        <%= link_to t("Teachers"), teachers_users_path, class: "btn btn-light col-sm-2" %>
+      <% elsif @user.student? %>
+        <%= link_to t("Students"), students_users_path, class: "btn btn-light col-sm-2" %>
+      <% else %>
+        <%= link_to t("Pending approval"), pending_approval_users_path, class: "btn btn-light col-sm-2" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

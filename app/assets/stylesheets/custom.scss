@@ -1,0 +1,193 @@
+@import "bootstrap";
+@import "flag-icon";
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400&subset=cyrillic,latin-ext');
+
+$accent-color: #5C9CC7;
+$text-color: #353535;
+$strip-color: #2E2F30;
+
+body{
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  color: $text-color
+}
+
+.navbar {
+  padding-bottom: 0;
+  text-align: center;
+}
+
+.dropdown-menu {
+  margin-top: 0;
+  border-top: 0;
+  background-color: #f8f9fa !important;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.dropdown-menu-left {
+  right: 0;
+  left: inherit;
+}
+
+@media only screen and (max-width: 770px) {
+  .navbar {
+    padding-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .dropdown-menu {
+    border: 0;
+    background-color: white !important;
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+}
+
+.inner-headline {
+  background-color: $strip-color;
+  color: white;
+  padding: 20px 0;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 42px;
+}
+
+footer {
+  background-color: $strip-color;
+  margin-top: 45px;
+  padding-top: 10px;
+  a {
+    color: silver;
+    &:hover {
+      color: $accent-color;
+      text-decoration: none;
+    }
+  }
+  ul {
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+  .right {
+    float: right;
+  }
+}
+
+.footer-copyright {
+  color: silver;
+}
+
+.sidebar {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+
+    a {
+      color: $text-color;
+    }
+
+    a:hover {
+      color: $accent-color;
+    }
+  }
+
+  i {
+    vertical-align: middle;
+    font-size: 15px;
+  }
+}
+
+.col-form-label, .nav-link {
+  font-weight: 400;
+}
+
+.form-control, .custom-select, option {
+  font-weight: 300;
+}
+
+.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+  color: $accent-color;
+}
+
+.dropdown-item {
+  font-weight: 300;
+  color: $text-color;
+
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+.title {
+  font-weight: 400;
+  a {
+    color: $text-color;
+    &:hover {
+      color: $accent-color;
+    }
+  }
+}
+
+table {
+  a {
+    color: $text-color;
+    &:hover {
+      color: $accent-color;
+    }
+  }
+}
+
+#datatable_wrapper {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background-color: $accent-color;
+  border-width: 0;
+  &:hover {
+    background-color: #4990c0;
+  }
+}
+
+.btn-row {
+  margin: 10px;
+  .btn {
+    margin: 0 5px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  footer {
+    ul {
+      display: table;
+      padding: 0;
+      margin: 0 auto;
+    }
+    .right {
+      float: none;
+    }
+  }
+  .btn-row {
+    .btn {
+      margin: 5px 0;
+    }
+  }
+}
+
+img {
+  margin: 10px 0;
+}
+
+.page-link {
+  color: $accent-color
+}
+
+.page-item.active .page-link {
+  background-color: $accent-color;
+  border-color: #4990c0;
+}

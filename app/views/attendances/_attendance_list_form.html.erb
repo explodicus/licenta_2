@@ -1,0 +1,11 @@
+<%= form_tag do %>
+  <%= hidden_field_tag :group_id, @group.id %>
+  <%= hidden_field_tag :lesson_time, Time.now  %>
+  <% @group.users.with_role(:student).each do |user| %>
+    <div class="form-group row">
+      <%= check_box_tag 'students[]', user.id, @present_users.include?(user), class:"form-check-input" %>
+      <%= label_tag 'students[]', user.full_name, class:"form-check-label" %>
+    </div>
+  <% end %>
+  <%= submit_tag "Save", class: "btn btn-primary" %>
+<% end %>

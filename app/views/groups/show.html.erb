@@ -1,0 +1,131 @@
+<% provide(:title, t('Group info')) %>
+
+<div class="row">
+  <h1 class="col-sm-6"><%= @group.name %></h1>
+  <h5 class="col-sm-6" style="text-align: end"><%= t(@group.kind) %></h5>
+</div>
+<br>
+<div class="row">
+  <h5 class="col-sm-3"><%= t('Active') %></h5>
+  <div class="col-sm-3"><%= render partial: 'active_icon', locals: { value: @group.active } %></div>
+  <h5 class="col-sm-3"><%= t('In vacation') %></h5>
+  <div class="col-sm-3"> <%= render partial: 'active_icon', locals: { value: @group.in_vacation } %></div>
+</div>
+
+<div class="row">
+  <h5 class="col-sm-3"><%= t('Last update') %></h5>
+  <div class="col-sm-3"><%= @group.updated_at.strftime("%H:%M %d.%m.%Y") %></div>
+  <h5 class="col-sm-3"><%= t('Created on') %></h5>
+  <div class="col-sm-3"><%= @group.created_at.strftime("%d.%m.%Y") %></div>
+</div>
+
+<br>
+
+<div class="group_tables row">
+  <div class="col-sm-6">
+    <table class="table table-hover">
+      <thead style="text-align: center">
+        <tr>
+          <th colspan="2">
+            <%= link_to t('Teachers'), teachers_users_path %>
+          </th>
+        </tr>
+        <tr>
+          <th><%= t('Last name') %></th>
+          <th><%= t('First name') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @group.users.with_role(:teacher).order('last_name ASC').each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user.last_name, user %>
+          </td>
+          <td>
+            <%= link_to user.first_name, user %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-6">
+    <table class="table table-hover">
+      <thead style="text-align: center">
+      <tr>
+        <th colspan="2">
+          <%= link_to t('Students'), students_users_path %>
+        </th>
+      </tr>
+      <tr>
+        <th><%= t('Last name') %></th>
+        <th><%= t('First name') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @group.users.with_role(:student).order('last_name ASC').each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user.last_name, user %>
+          </td>
+          <td>
+            <%= link_to user.first_name, user %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<div class="row col-sm-12">
+  <h4><%= t('Notes') %></h4>
+</div>
+<br>
+<div>
+  <% if @group.notes.blank? %>
+    <p><%= t('No notes') %></p>
+  <% else %>
+    <% @group.notes.split("\n").each do |line| %>
+      <p><%= line %></p>
+    <% end %>
+  <% end %>
+</div>
+<br>
+<% if @group.lessons.count > 0 %>
+  <%= render partial: 'shared/timetable', locals: { timetable: @group.lessons.order(:week_day, :start_time), user: -1 } %>
+<% end %>
+
+<% if current_user.admin? %>
+  <div class="row col-sm-12">
+    <h4><%= t('New lesson') %></h4>
+  </div>
+  <%= form_for(@lesson) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.hidden_field :group_id, value: @group.id %>
+    <div class="form-group row">
+      <%= f.label :week_day, t('Week day'), class:"col-sm-2 col-form-label" %>
+      <div class="col-sm-2">
+        <%= f.select :week_day, Array(0..6).collect { |i| [t(:"date.day_names")[(i + 1) % 7].capitalize, i + 1] }, {}, class: 'custom-select' %>
+      </div>
+      <%= f.label :start_time, t('Start time'), class:"col-sm-2 col-form-label" %>
+      <div class="col-sm-2">
+        <%= f.time_select :start_time, {minute_step: 15, start_hour: 8, end_hour: 20}, class: 'custom-select', style: 'width:45%' %>
+      </div>
+      <%= f.label :end_time, t('End time'), class:"col-sm-2 col-form-label" %>
+      <div class="col-sm-2">
+          <%= f.time_select :end_time, {minute_step: 15, start_hour: 8, end_hour: 21}, class: 'custom-select', style: 'width:45%' %>
+      </div>
+    </div>
+    <%= f.submit t("Save"), class: "btn btn-primary" %>
+  <% end %>
+
+  <div class="row btn-row">
+      <%= link_to t("Edit group"), edit_group_path(@group), class: "btn btn-light col-sm-2" %>
+      <%= link_to t("Delete group"), @group, method: :delete, data: {confirm: t("Are you sure you want to delete this group?")}, class: "btn btn-danger col-sm-2" %>
+      <div class="col-sm-5"></div>
+      <%= link_to t("All groups"), groups_path, class: "btn btn-light btn-right col-sm-2" %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <ul>
+          <li>
+            <%= link_to raw('<span class="flag-icon flag-icon-ro"></span>'), url_for(locale: :ro) %>
+          </li>
+          <li>
+            <%= link_to raw('<span class="flag-icon flag-icon-ru"></span>'), url_for(locale: :ru) %>
+          </li>
+          <li>
+            <%= link_to raw('<span class="flag-icon flag-icon-gb"></span>'), url_for(locale: :en) %>
+          </li>
+        </ul>
+      </div>
+      <!-- Copyright -->
+      <div class="footer-copyright col-sm-4 text-center py-3">
+        © <%= Time.current.year %> Copyright: Dan Gutu
+      </div>
+      <!-- Copyright -->
+      <div class="col-sm-4">
+        <ul class="right">
+          <li><%= link_to t(:Help), help_path %></li>
+          <li><%= link_to t(:About), about_path %></li>
+          <li><%= link_to t(:Contact), contact_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
