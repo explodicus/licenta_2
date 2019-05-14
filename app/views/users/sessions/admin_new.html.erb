@@ -1,9 +1,10 @@
-<% provide(:title, t('Login')) %>
+<% provide(:title, 'Admin Log in') %>
 
 <br>
 
 <div class="login">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= hidden_field_tag :admin_sign_in, true %>
     <div class="form-group row">
       <%= f.label :email, class:"col-sm-3 col-form-label" %>
       <div class="col-sm-9">

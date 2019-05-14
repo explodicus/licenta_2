@@ -16,25 +16,34 @@
   <tbody>
   <% index = 0 %>
   <% max_index = timetable.count %>
+  <% date = Date.today.beginning_of_week - 1.day %>
   <% for i in 0..6 %>
-    <tr>
+    <% date += 1.day %>
+    <% if date == Date.today %>
+      <tr class="today">
+    <% else %>
+      <tr>
+    <% end %>
       <th scope="row"><%= t(:"date.day_names")[(i + 1) % 7].capitalize %></th>
+      <% vacation_kind = Vacation.is_vacation(date) %>
       <% current_time = 8 * 60 %>
       <% while index < max_index && i + 1 == timetable[index].week_day %>
-        <% start_time = timetable[index].start_time.hour * 60 + timetable[index].start_time.min - 1 %>
-        <% end_time = timetable[index].end_time.hour * 60 + timetable[index].end_time.min + 1 %>
-        <% if (start_time - current_time) / 15 != 0 %>
-          <td colspan="<%= (start_time - current_time) / 15 %>"></td>
-        <% end %>
-        <% if (end_time - start_time) / 15 != 0 %>
+        <% unless vacation_kind.include?(Group.find(timetable[index].group_id).kind) %>
+          <% start_time = timetable[index].start_time.hour * 60 + timetable[index].start_time.min - 1 %>
+          <% end_time = timetable[index].end_time.hour * 60 + timetable[index].end_time.min + 1 %>
+          <% if (start_time - current_time) / 15 != 0 %>
+          <td colspan="<%=  (start_time - current_time) / 15  %>"></td>
+          <%  end %>
+          <%  if (end_time - start_time) / 15 != 0 %>
           <td colspan="<%= (end_time - start_time) / 15 %>" title="<%= "#{(timetable[index].start_time - 1.minute).strftime("%H:%M")} - #{(timetable[index].end_time + 1.minute).strftime("%H:%M")}" %>" style="background-color: <%= if user == -1
-                                                                                                                                                                                                                                        '#353535'
+                                                                                                                                                                                                                                      '#353535'
                                                                                                                                                                                                                                       else
                                                                                                                                                                                                                                         Relationship.find_by(group_id: timetable[index].group_id, user_id: user).color
                                                                                                                                                                                                                                       end %>"></td>
+          <%  end  %>
+          <%  current_time = end_time  %>
         <% end %>
-        <% current_time = end_time %>
-        <% index += 1 %>
+        <%  index += 1  %>
       <% end %>
       <% if (21 * 60 - current_time) / 15 != 0 %>
         <td colspan="<%= (21 * 60 - current_time) / 15 %>"></td>

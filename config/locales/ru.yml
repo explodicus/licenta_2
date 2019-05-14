@@ -154,3 +154,6 @@ ru:
   Are you sure you want to delete this post?: 'Вы уверены что хотите удалить этот пост?'
   Are you sure you want to delete this group?: 'Вы уверены что хотите удалить эту группу?'
   Are you sure you want to delete this vacation?: 'Вы уверены что хотите удалить эту каникулу'
+  Please use the admin login page: 'Пожалуйста, используйте страницу входа администратора'
+  An administrator is reviewing your application: 'Администратор рассматривает вашу заявку'
+  Invalid email or password: 'Неправильный email или пароль'

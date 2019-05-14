@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     devise_scope :user do
       get '/users', to: 'devise/registrations#new'
       get '/users/password', to: 'devise/passwords#new'
+      get '/users/admin/sign_in' => 'users/sessions#admin_new'
     end
 
     resources :users do

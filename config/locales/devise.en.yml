@@ -142,5 +142,5 @@ en:
       not_found: not found
       not_locked: was not locked
       not_saved:
-        one: '1 error prohibited this %{resource} from being saved:'
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "Couldn't save because of 1 error:"
+        other: "Couldn't save because of %{count} errors:"
