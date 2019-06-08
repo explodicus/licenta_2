@@ -2,6 +2,7 @@ class Group < ApplicationRecord
   has_many :relationships, dependent: :destroy
   has_many :users, through: :relationships
   has_many :lessons, dependent: :destroy
+  has_many :single_lessons, dependent: :destroy
   has_many :attendances, dependent: :destroy
   validates :name, presence: true, length: { maximum: 50 }
   validates :kind, presence: true,

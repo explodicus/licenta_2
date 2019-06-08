@@ -122,6 +122,37 @@
     <%= f.submit t("Save"), class: "btn btn-primary" %>
   <% end %>
 
+    <div class="row col-sm-12">
+      <h4><%= t('New unique lesson') %></h4>
+    </div>
+    <%= form_for(@single_lesson) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.hidden_field :group_id, value: @group.id %>
+      <div class="form-group row">
+        <%= f.label :name, t('Lesson name'), class:"col-sm-2 col-form-label" %>
+        <div class="col-sm-2">
+          <%= f.text_field :name, class: 'form-control', placeholder: t("Lesson name") %>
+        </div>
+        <%= label_tag :date, t('Date'), class:"col-sm-2 col-form-label" %>
+        <div class="col-sm-6">
+          <%= date_select :date, {order: [:day, :month, :year],
+                                               prompt: { day: t('Select day'), month: t('Select month'), year: t('Select year') },
+                                               start_year: Date.today.year - 5, end_year: Date.today.year - 100}, {}, class: 'custom-select col-sm-3' %>
+        </div>
+      </div>
+        <div class="form-group row">
+        <%= f.label :start_date_time, t('Start time'), class:"col-sm-2 col-form-label" %>
+        <div class="col-sm-2">
+          <%= f.time_select :start_date_time, {minute_step: 15, start_hour: 8, end_hour: 20}, class: 'custom-select', style: 'width:45%' %>
+        </div>
+        <%= f.label :end_date_time, t('End time'), class:"col-sm-2 col-form-label" %>
+        <div class="col-sm-2">
+          <%= f.time_select :end_date_time, {minute_step: 15, start_hour: 8, end_hour: 21}, class: 'custom-select', style: 'width:45%' %>
+        </div>
+      </div>
+      <%= f.submit t("Save"), class: "btn btn-primary" %>
+    <% end %>
+
   <div class="row btn-row">
       <%= link_to t("Edit group"), edit_group_path(@group), class: "btn btn-light col-sm-2" %>
       <%= link_to t("Delete group"), @group, method: :delete, data: {confirm: t("Are you sure you want to delete this group?")}, class: "btn btn-danger col-sm-2" %>

@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
   def show
     authorize @group
     @lesson = @group.lessons.build
+    @single_lesson = @group.single_lessons.build
   end
 
   def new

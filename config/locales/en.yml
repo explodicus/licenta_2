@@ -176,3 +176,9 @@ en:
   Please use the admin login page: 'Please use the admin log in page'
   An administrator is reviewing your application: 'An administrator is reviewing your application'
   Invalid email or password: 'Invalid email or password'
+  End time must be after start time: 'End time must be after start time'
+  New lesson scheduled: 'New lesson scheduled'
+  Couldn't schedule lesson: "Couldn't schedule lesson"
+  Lesson deleted: 'Lesson deleted'
+  New unique lesson: 'New unique lesson'
+  Lesson name: 'Lesson name'

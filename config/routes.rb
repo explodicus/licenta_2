@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :vacations, except: [:show]
     resources :lessons, only: %i[create destroy]
+    resources :single_lessons, only: %i[create destroy]
 
     resources :children, only: %i[create new update] do
       member do

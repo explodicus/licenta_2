@@ -8,6 +8,10 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
+  def admin_new
+    new
+  end
+
   # POST /resource/sign_in
   def create
     if User.exists?(email: params[:user][:email])
@@ -15,8 +19,11 @@ class Users::SessionsController < Devise::SessionsController
       if params[:admin_sign_in] && user.admin?
         if user.valid_password?(params[:user][:password])
           I18n.locale = user.locale
+          super
+        else
+          flash[:danger] = t('Invalid email or password')
+          redirect_back(fallback_location: root_path)
         end
-        super
         return
       end
       if user.admin?
@@ -29,21 +36,16 @@ class Users::SessionsController < Devise::SessionsController
           I18n.locale = user.locale
         end
         super
-        return
       else
         flash[:primary] = t('An administrator is reviewing your application')
         redirect_to new_user_session_path
-        return
       end
+      return
     else
       flash[:danger] = t('Invalid email or password')
       redirect_to new_user_session_path
       return
     end
-  end
-
-  def admin_new
-    new
   end
 
   # DELETE /resource/sign_out

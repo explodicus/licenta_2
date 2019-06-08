@@ -35,7 +35,7 @@ gem 'rolify', '~> 5.2'
 gem 'rails-i18n', '~> 5.1'
 gem 'whenever', require: false
 
-gem 'carrierwave', '~> 0.11.2'
+gem 'carrierwave', '~> 1.3.1'
 gem "mini_magick"
 
 gem 'faker', '~> 1.9', '>= 1.9.3'
