@@ -20,13 +20,11 @@
 //= require_self
 
 function show_lesson_delete(id) {
-    for (let element of document.getElementsByClassName('lesson_delete')) {
+    for (var element of document.getElementsByClassName('lesson_delete')) {
         element.style.display = 'none';
     }
     document.getElementById(id).style.display = 'inline-block';
 }
-
-
 
 $(document).ready(function() {
     if (locale == 'ro') {
