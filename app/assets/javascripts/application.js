@@ -21,9 +21,9 @@
 
 function show_lesson_delete(id) {
     for (let element of document.getElementsByClassName('lesson_delete')) {
-        element.style.display = 'none'
+        element.style.display = 'none';
     }
-    document.getElementById(id).style.display = 'inline-block'
+    document.getElementById(id).style.display = 'inline-block';
 }
 
 
