@@ -20,8 +20,8 @@
 //= require_self
 
 function show_lesson_delete(id) {
-    for (let item of document.getElementsByClassName('lesson_delete')) {
-        item.style.display = 'none'
+    for (let element of document.getElementsByClassName('lesson_delete')) {
+        element.style.display = 'none'
     }
     document.getElementById(id).style.display = 'inline-block'
 }
