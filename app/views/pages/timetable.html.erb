@@ -1,0 +1,4 @@
+<% provide(:title, t('Timetable')) %>
+<div class="container">
+  <%= render partial: 'shared/timetable', locals: { timetable: current_user.lessons, user: current_user.id } %>
+</div>

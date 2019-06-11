@@ -101,10 +101,27 @@ class User < ApplicationRecord
   end
 
   def lessons
-    groups = self.groups
+    groups = self.groups.where(active: true)
     lessons = Array.new
-    groups.each { |group| lessons += group.lessons }
-    lessons.sort_by { |lesson| [lesson.week_day, lesson.start_time] }
+    groups.each do |group|
+      group.single_lessons.where('start_date_time > ? AND start_date_time < ?', Date.parse('Sunday').to_time, (Date.parse('Sunday') + 7.day).to_time).each do |lesson|
+        lessons.append lesson
+      end
+      group.lessons.all.each do |lesson|
+        lessons.append lesson.to_single_lesson
+      end
+    end
+    return lessons.sort_by{ |lesson| lesson.start_date_time }
+  end
+
+  def in_lesson
+    self.lessons.each do |lesson|
+      if lesson.start_date_time < Time.now && lesson.end_date_time > Time.now && !Group.find(lesson.group_id).in_vacation
+        return lesson.group_id
+      else
+        false
+      end
+    end
   end
 
   def self.assign_roles

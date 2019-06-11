@@ -33,9 +33,6 @@
 <% end %>
 <h4><%= t('Groups') %></h4>
 <%= render partial: 'shared/group_table', locals: {groups: @user.groups} %>
-<% if @user.lessons.count > 0 %>
-  <%= render partial: 'shared/timetable', locals: { timetable: @user.lessons, user: @user.id } %>
-<% end %>
 
 <div class="row btn-row">
   <% if current_user.children.include?(@user) %>

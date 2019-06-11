@@ -9,12 +9,39 @@ class Group < ApplicationRecord
                    inclusion: { in: %w[Weekend Vacation International Academic] }
   before_save :default_values
 
+  def all_lessons_week
+    lessons = Array.new
+    self.single_lessons.where('start_date_time > ? AND start_date_time < ?', Date.parse('Sunday').to_time, (Date.parse('Sunday') + 7.day).to_time).each do |lesson|
+      lessons.append lesson
+    end
+    self.lessons.all.each do |lesson|
+      lessons.append lesson.to_single_lesson
+    end
+    lessons.sort_by { |lesson| lesson.start_date_time }
+  end
+
+  def all_lessons_day(date)
+    lessons = Array.new
+    self.single_lessons.where('start_date_time > ? AND start_date_time < ?', date.to_time, (date + 1.day).to_time).each do |lesson|
+      lessons.append lesson
+    end
+    self.lessons.all.each do |lesson|
+      single_lesson = lesson.to_single_lesson
+      if single_lesson.start_date_time.to_date == date
+        lessons.append single_lesson
+      end
+    end
+    lessons.sort_by { |lesson| lesson.start_date_time }
+  end
+
+
   def find_lesson(lesson_time)
-    converted_lesson_time = Time.new(2000, 1, 1, lesson_time.hour,
-                                     lesson_time.min)
-    lessons.find_by('week_day = ? AND start_time < ? AND end_time > ?',
-                    lesson_time.wday, converted_lesson_time,
-                    converted_lesson_time)
+    self.all_lessons_day(lesson_time.to_date).each do |lesson|
+      if lesson.start_date_time < lesson_time && lesson.end_date_time > lesson_time
+        return lesson
+      end
+    end
+    return false
   end
 
   def self.update_status

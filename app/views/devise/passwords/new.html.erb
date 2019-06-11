@@ -1,4 +1,4 @@
-<% provide(:title, 'Password reset') %>
+<% provide(:title, t('Password reset')) %>
 
 <br>
 <br>
@@ -13,7 +13,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions", class: 'btn btn-primary' %>
+    <%= f.submit t("Send instructions"), class: 'btn btn-primary' %>
   </div>
 <% end %>
 

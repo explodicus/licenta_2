@@ -19,6 +19,14 @@ class Lesson < ApplicationRecord
     Attendance.where('time > ? AND time < ?', start_datetime, end_datetime)
   end
 
+  def to_single_lesson
+    single_lesson = SingleLesson.new
+    single_lesson.start_date_time = self.start_datetime + (week_day - Date.today.wday).day
+    single_lesson.end_date_time = self.end_datetime + (week_day - Date.today.wday).day
+    single_lesson.group_id = group_id
+    return single_lesson
+  end
+
   private
 
   def end_after_start

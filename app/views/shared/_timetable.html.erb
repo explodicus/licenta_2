@@ -16,30 +16,44 @@
   <tbody>
   <% index = 0 %>
   <% max_index = timetable.count %>
-  <% date = Date.today.beginning_of_week - 1.day %>
-  <% for i in 0..6 %>
+  <% date = Date.today - Date.today.wday.days %>
+  <% for i in 0..5 %>
     <% date += 1.day %>
     <% if date == Date.today %>
       <tr class="today">
     <% else %>
       <tr>
     <% end %>
-      <th scope="row"><%= t(:"date.day_names")[(i + 1) % 7].capitalize %></th>
+      <th scope="row"><%= t(:"date.day_names")[i + 1].capitalize %></th>
       <% vacation_kind = Vacation.is_vacation(date) %>
       <% current_time = 8 * 60 %>
-      <% while index < max_index && i + 1 == timetable[index].week_day %>
-        <% unless vacation_kind.include?(Group.find(timetable[index].group_id).kind) %>
-          <% start_time = timetable[index].start_time.hour * 60 + timetable[index].start_time.min - 1 %>
-          <% end_time = timetable[index].end_time.hour * 60 + timetable[index].end_time.min + 1 %>
+      <% while index < max_index && i + 1 == timetable[index].start_date_time.wday %>
+        <% if !vacation_kind or !vacation_kind.include?(Group.find(timetable[index].group_id).kind) %>
+          <% start_time = timetable[index].start_date_time.hour * 60 + timetable[index].start_date_time.min - 1 %>
+          <% end_time = timetable[index].end_date_time.hour * 60 + timetable[index].end_date_time.min + 1 %>
           <% if (start_time - current_time) / 15 != 0 %>
           <td colspan="<%=  (start_time - current_time) / 15  %>"></td>
           <%  end %>
           <%  if (end_time - start_time) / 15 != 0 %>
-          <td colspan="<%= (end_time - start_time) / 15 %>" title="<%= "#{(timetable[index].start_time - 1.minute).strftime("%H:%M")} - #{(timetable[index].end_time + 1.minute).strftime("%H:%M")}" %>" style="background-color: <%= if user == -1
-                                                                                                                                                                                                                                      '#353535'
-                                                                                                                                                                                                                                      else
-                                                                                                                                                                                                                                        Relationship.find_by(group_id: timetable[index].group_id, user_id: user).color
-                                                                                                                                                                                                                                      end %>"></td>
+          <% if timetable[index].name %>
+            <% name = timetable[index].name + ': '%>
+          <% else %>
+            <% name = '' %>
+          <% end %>
+          <% tooltip = "#{name}#{(timetable[index].start_date_time - 1.minute).strftime("%H:%M")} - #{(timetable[index].end_date_time + 1.minute).strftime("%H:%M")}" %>
+          <td colspan="<%= (end_time - start_time) / 15 %>" title="<%= tooltip %>" style="cursor:pointer; background-color: <%= if user == -1
+                                                                                                                                  '#353535'
+                                                                                                                                else
+                                                                                                                                  Relationship.find_by(group_id: timetable[index].group_id, user_id: user).color
+                                                                                                                                end %>" <% if user == -1 %>
+                                                                                                                                            onclick="show_lesson_delete('<%= "lesson#{index}" %>')"
+                                                                                                                                        <% end %>>
+            <% if user == -1 %>
+              <div id="<%= "lesson#{index}" %>" class="lesson_delete">
+                <%= link_to t("Delete lesson"), timetable[index].lesson, method: :delete, data: {confirm: t("Are you sure you want to delete this lesson?")}, class: "btn btn-danger col-sm-2" %>
+              </div>
+            <% end %>
+          </td>
           <%  end  %>
           <%  current_time = end_time  %>
         <% end %>

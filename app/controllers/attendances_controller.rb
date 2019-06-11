@@ -17,15 +17,12 @@ class AttendancesController < ApplicationController
       @lesson_time = Time.new(params[:date]['{}(1i)'], params[:date]['{}(2i)'],
                               params[:date]['{}(3i)'], params[:time]['{}(4i)'],
                               params[:time]['{}(5i)'].to_i + 2)
-      @lesson = @group.find_lesson(@lesson_time)
     else
       @lesson_time = Time.now
-      if Lesson.exists?(params[:lesson_id])
-        @lesson = Lesson.find(params[:lesson_id])
-      end
     end
+    @lesson = @group.find_lesson(@lesson_time)
     if @lesson
-      attendances = @lesson.attendances
+      attendances = @lesson.attendances(@lesson_time)
       @present_users = attendances.map(&:user)
     else
       flash[:danger] = t('No lesson was found')
@@ -43,14 +40,9 @@ class AttendancesController < ApplicationController
     @group = Group.find(params[:group_id])
     authorize @group
     lesson_time = Time.parse(params[:lesson_time])
-    unless Lesson.exists?(params[:group_id])
-      flash[:danger] = t('Lesson was deleted')
-      redirect_to root_path
-      return
-    end
-    lesson = Lesson.find(params[:lesson_id])
+    lesson = @group.find_lesson(lesson_time)
     if lesson
-      lesson.attendances.each(&:destroy)
+      lesson.attendances(lesson_time).each(&:destroy)
       # Adding the new attendances
       params[:students].each do |user|
         attendance = Attendance.new(group_id: params[:group_id], user_id: user,

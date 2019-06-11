@@ -4,9 +4,8 @@ class SingleLessonsController < ApplicationController
   def create
     @single_lesson = SingleLesson.new(single_lesson_params)
     authorize @single_lesson
-    @lesson.start_time += 1.minute
-    @lesson.end_time -= 1.minute
-
+    @single_lesson.start_date_time = @single_lesson.start_date_time.change(year: params[:date]['{}(1i)'], month: params[:date]['{}(2i)'], day: params[:date]['{}(3i)']) + 1.minute
+    @single_lesson.end_date_time = @single_lesson.end_date_time.change(year: params[:date]['{}(1i)'], month: params[:date]['{}(2i)'], day: params[:date]['{}(3i)']) - 1.minute
     if @single_lesson.start_date_time > @single_lesson.start_date_time
       flash[:danger] = t('End time must be after start time')
       redirect_to @single_lesson.group
@@ -27,13 +26,13 @@ class SingleLessonsController < ApplicationController
     @single_lesson.group.users.each do |user|
       user.groups.each do |group|
         group.lessons.each do |lesson|
-          wday = @single_lesson.wday
+          wday = @single_lesson.start_date_time.wday
           if wday == 0
             wday = 7
           end
           next unless wday == lesson.week_day && (@single_lesson.old_start_time..@single_lesson.old_end_time).overlaps?(lesson.start_time..lesson.end_time)
           flash[:danger] = "Overlap found with #{user.full_name}'s timetable in group #{group.name}"
-          redirect_to @lesson.group
+          redirect_to lesson.group
           return
         end
       end
@@ -58,7 +57,6 @@ class SingleLessonsController < ApplicationController
   private
 
   def single_lesson_params
-    params.require(:single_lesson).permit(:group_id, :start_date_time, :end_date_time)
+    params.require(:single_lesson).permit(:group_id, :name, :start_date_time, :end_date_time)
   end
-
 end

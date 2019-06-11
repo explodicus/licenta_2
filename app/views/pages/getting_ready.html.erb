@@ -6,8 +6,14 @@
     <th style="background-color: RED"></th>
   </tr>
   <tr style="height: 50px;">
-    <td style="background-color: PINK"></td>
-    <td style="background-color: HOTPINK"></td>
+    <td style="background-color: PINK; cursor:pointer;" onclick="show_lesson_delete('lesson1')">
+
+    </td>
+    <td style="background-color: HOTPINK; cursor:pointer;" onclick="show_lesson_delete('lesson2')">
+      <div id="lesson2" class="lesson_delete">
+        <%= link_to t("All groups"), groups_path, class: "btn btn-light btn-right col-sm-2" %>
+      </div>
+    </td>
     <td style="background-color: ORANGE"></td>
   </tr>
   <tr style="height: 50px;">
@@ -36,3 +42,4 @@
     <td style="background-color: TAN"></td>
   </tr>
 </table>
+<%= link_to t("All groups"), groups_path, class: "btn btn-light btn-right col-sm-2" %>

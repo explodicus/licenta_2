@@ -1,19 +1,11 @@
 <ul>
-  <% current_user.groups.where(active: true, in_vacation: false).each do |group| %>
-    <% group.lessons.each do |lesson| %>
-      <% now = Time.new(2000, 1, 1, Time.now.hour, Time.now.min) %>
-      <% if lesson.week_day == Time.now.wday && lesson.start_time < now && lesson.end_time > now %>
-        <li>
-          <i class="material-icons">
-            navigate_next
-          </i>
-          <%= form_tag found_attendance_url do %>
-            <%= hidden_field_tag :group_id, group.id %>
-            <%= hidden_field_tag :lesson_id, lesson.id %>
-            <%= submit_tag t("Mark attendance"), class: "btn btn-primary" %>
-          <% end %>
-        </li>
+  <% group_id = current_user.in_lesson %>
+  <% if group_id %>
+    <li>
+      <%= form_tag found_attendance_url do %>
+        <%= hidden_field_tag :group_id, group_id %>
+        <%= submit_tag t("Mark attendance"), class: "btn btn-primary" %>
       <% end %>
-    <% end %>
+    </li>
   <% end %>
 </ul>

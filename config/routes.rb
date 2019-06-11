@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get 'france' => 'pages#france'
     get 'spain' => 'pages#spain'
     get 'study_abroad' => 'pages#study_abroad'
+    get 'timetable' => 'pages#timetable'
 
     devise_for :users, :controllers => {:sessions => "users/sessions"}
 

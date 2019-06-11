@@ -94,9 +94,7 @@
   <% end %>
 </div>
 <br>
-<% if @group.lessons.count > 0 %>
-  <%= render partial: 'shared/timetable', locals: { timetable: @group.lessons.order(:week_day, :start_time), user: -1 } %>
-<% end %>
+<%= render partial: 'shared/timetable', locals: { timetable: @group.all_lessons_week, user: -1 } %>
 
 <% if current_user.admin? %>
   <div class="row col-sm-12">
@@ -108,7 +106,7 @@
     <div class="form-group row">
       <%= f.label :week_day, t('Week day'), class:"col-sm-2 col-form-label" %>
       <div class="col-sm-2">
-        <%= f.select :week_day, Array(0..6).collect { |i| [t(:"date.day_names")[(i + 1) % 7].capitalize, i + 1] }, {}, class: 'custom-select' %>
+        <%= f.select :week_day, Array(1..6).collect { |i| [t(:"date.day_names")[i].capitalize, i + 1] }, {}, class: 'custom-select' %>
       </div>
       <%= f.label :start_time, t('Start time'), class:"col-sm-2 col-form-label" %>
       <div class="col-sm-2">
@@ -135,9 +133,8 @@
         </div>
         <%= label_tag :date, t('Date'), class:"col-sm-2 col-form-label" %>
         <div class="col-sm-6">
-          <%= date_select :date, {order: [:day, :month, :year],
-                                               prompt: { day: t('Select day'), month: t('Select month'), year: t('Select year') },
-                                               start_year: Date.today.year - 5, end_year: Date.today.year - 100}, {}, class: 'custom-select col-sm-3' %>
+          <%= date_select :date, {}, {order: [:day, :month, :year],
+                                               start_year: Date.today.year + 5, end_year: Date.today.year - 5}, class: 'custom-select col-sm-3' %>
         </div>
       </div>
         <div class="form-group row">

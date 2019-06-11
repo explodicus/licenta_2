@@ -19,15 +19,14 @@
 //= require_tree .
 //= require_self
 
-window.onload = function() {
-    var anchors = document.getElementsByClassName('flag-icon');
-    for(var i = 0; i < anchors.length; i++) {
-        var anchor = anchors[i];
-        anchor.onclick = function() {
-            Turbolinks.clearCache()
-        }
+function show_lesson_delete(id) {
+    for (let item of document.getElementsByClassName('lesson_delete')) {
+        item.style.display = 'none'
     }
+    document.getElementById(id).style.display = 'inline-block'
 }
+
+
 
 $(document).ready(function() {
     if (locale == 'ro') {

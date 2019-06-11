@@ -33,9 +33,10 @@ class LessonsController < ApplicationController
   end
 
   def destroy
+    @lesson = Lesson.find(params[:id])
+    authorize @lesson
     @group = @lesson.group
     @lesson.destroy
-    authorize @lesson
     flash[:success] = 'Lesson deleted'
     redirect_to @group
   end

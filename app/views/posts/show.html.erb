@@ -17,6 +17,7 @@
     <% if current_user.has_role? :student %>
       <%= render 'student_aside' %>
     <% end %>
+    <h5 class="title"><%= link_to t("Timetable"), timetable_path %></h5>
   </div>
   <div class="col-sm-8">
     <%=image_tag @post.image.url, class: 'img-fluid', style: 'height: auto; width: 100%; display: block;' if @post.image? %>
