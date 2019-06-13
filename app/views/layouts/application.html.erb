@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <title><%= full_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,9 +10,12 @@
     <%= stylesheet_link_tag    'application', media: 'all',
                                'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path('logo.ico') %>
   </head>
   <body>
+  <div id="big-container">
     <%= render 'layouts/header' %>
+  <div id="content">
     <% if yield(:title).present? %>
       <div class="inner-headline">
         <div class="container">
@@ -24,9 +27,12 @@
       <%= render 'shared/alerts' %>
       <%= yield %>
     </div>
+  </div>
+
     <%= render 'layouts/footer' %>
-    <div class="container">
+    <div class="container params">
       <%= debug(params) if Rails.env.development? %>
     </div>
+  </div>
   </body>
 </html>
