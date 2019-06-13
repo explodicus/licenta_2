@@ -1,0 +1,33 @@
+<% provide(:title, t('New message')) %>
+
+<br>
+
+<%= form_for(@notification) do |f| %>
+  <%= render 'devise/shared/error_messages', resource: @notification %>
+
+  <div class="form-group row">
+    <%= label_tag :group_id, t("Group"), class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= select_tag :group_id, options_for_select(current_user.groups.where(active: true).collect { | g | [g.name, g.id] }), {class: 'custom-select'} %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :title, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :title, autofocus: true, class: 'form-control', placeholder: t("Title") %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :content, class:"col-sm-3 col-form-label" %>
+    <div class="col-sm-9">
+      <%= f.text_area :content, class: 'form-control', placeholder: t("Content") %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t("Send message"), class: 'btn btn-primary'%>
+  </div>
+
+<% end %>

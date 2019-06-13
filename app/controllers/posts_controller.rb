@@ -20,7 +20,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     authorize @post
     if @post.save
-      flash[:success] = 'Post was successfully created'
+      flash[:success] = t('Post was successfully created')
       redirect_to @post
     else
       render 'new'

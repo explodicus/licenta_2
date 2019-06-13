@@ -82,3 +82,11 @@ user.save!
   user.skip_confirmation!
   user.save!
 end
+
+95.times do |n|
+
+  notification = User.find(3).notifications.build(title: "Message #{n}",
+                                                  content: "Content #{n}",
+                                                  read: false)
+  notification.save
+end

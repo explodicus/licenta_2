@@ -1,0 +1,10 @@
+<% provide(:title, @notification.title) %>
+
+<div class="row">
+  <%= render 'shared/aside' %>
+  <div class="col-sm-8">
+    <% @notification.content.split("\n").each do |line| %>
+        <p><%= line %></p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="col-sm-4 sidebar">
+  <div class="btn-group dropright">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Notifications
+      <% if current_user.notifications.where(read: false).count > 0 %>
+        <span class="badge badge-light"><%= current_user.notifications.where(read: false).count %></span>
+      <% end %>
+    </button>
+    <div class="dropdown-menu overflow-auto notifications" aria-labelledby="dropdownMenuButton">
+      <% current_user.notifications.each do |notification| %>
+        <%= link_to notification.title, notification, class: if notification.read
+                                                               'dropdown-item'
+                                                             else
+                                                               'dropdown-item bold'
+                                                             end %>
+      <% end %>
+    </div>
+  </div>
+  <% if current_user.has_role? :admin %>
+    <%= render 'shared/admin_aside' %>
+  <% end %>
+  <% if current_user.has_role? :teacher %>
+    <%= render 'shared/teacher_aside' %>
+  <% end %>
+  <% if (current_user.has_role? :parent) && current_user.has_confirmed_children? %>
+    <%= render 'shared/parent_aside' %>
+  <% end %>
+  <% if current_user.has_role? :student %>
+    <%= render 'shared/student_aside' %>
+  <% end %>
+  <h5 class="title"><%= link_to t("Timetable"), timetable_path %></h5>
+</div>

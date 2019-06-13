@@ -116,12 +116,14 @@ class User < ApplicationRecord
 
   def in_lesson
     self.lessons.each do |lesson|
+      debugger
       if lesson.start_date_time < Time.now && lesson.end_date_time > Time.now && !Group.find(lesson.group_id).in_vacation
         return lesson.group_id
       else
         false
       end
     end
+    false
   end
 
   def self.assign_roles

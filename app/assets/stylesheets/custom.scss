@@ -152,6 +152,17 @@ table {
   &:hover {
     background-color: #4990c0;
   }
+  &:focus {
+    background-color: #3776a0;
+  }
+}
+.btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle{
+  background-color: #3776a0;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: $accent-color;
+  color: white;
 }
 
 .btn-row {
@@ -205,4 +216,13 @@ form {
   position: absolute;
   display: none;
   width: 100%;
+}
+
+.notifications {
+  height: 200px;
+  border: 0;
+}
+
+.bold {
+  font-weight: bold;
 }

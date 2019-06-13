@@ -20,6 +20,9 @@ ro:
         image: Imagine
       user:
         discount: Reducere
+      notification:
+        title: Titlu
+        content: Conținut
   Help: "Ajutor"
   About: 'Despre'
   Contact: 'Contact'
@@ -103,6 +106,7 @@ ro:
   Date of birth: 'Data nașterii'
   Discount: 'Reducere'
   Groups: 'Grupuri'
+  Group: 'Grup'
   Edit account: 'Editează contul'
   Approve account: 'Aprobă contul'
   Remove admin: 'Șterge admin-ul'
@@ -168,3 +172,7 @@ ro:
   Password reset: 'Resetare parola'
   Send instructions: 'Trimiteți instrucțiunile'
   Delete lesson: 'Șterge lecția'
+  Send message: 'Transmite mesaj'
+  New message: 'Mesaj nou'
+  Message was successfully sent: 'Mesajul a fost transmis cu succes'
+  Post was successfully created: 'Postarea a fost creată cu succes'
