@@ -7,6 +7,10 @@ Rails.application.routes.draw do
       root 'posts#index'
     end
 
+    get "/404", to: "errors#not_found"
+    get "/422", to: "errors#unacceptable"
+    get "/500", to: "errors#internal_error"
+
     # get '/:locale' => 'pages#home'
     root 'pages#home'
     get 'home' => 'pages#home'
@@ -26,7 +30,6 @@ Rails.application.routes.draw do
     get 'france' => 'pages#france'
     get 'spain' => 'pages#spain'
     get 'study_abroad' => 'pages#study_abroad'
-    get 'timetable' => 'pages#timetable'
 
     devise_for :users, :controllers => {:sessions => "users/sessions"}
 
@@ -54,6 +57,7 @@ Rails.application.routes.draw do
         get 'sign_sb_in'
         get 'set_discount'
         put 'update_discount'
+        get 'timetable'
       end
     end
 

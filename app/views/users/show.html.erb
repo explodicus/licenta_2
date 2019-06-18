@@ -31,8 +31,14 @@
   </div>
   <br>
 <% end %>
-<h4><%= t('Groups') %></h4>
-<%= render partial: 'shared/group_table', locals: {groups: @user.groups} %>
+<div class="user_info row">
+  <%= link_to t('Timetable'), timetable_user_path(@user), class: 'btn btn-light col-sm-12' %>
+</div>
+<br>
+<% if (current_user.has_role? :admin) || (current_user.has_role? :teacher) %>
+  <h4><%= t('Groups') %></h4>
+  <%= render partial: 'shared/group_table', locals: {groups: @user.groups} %>
+<% end %>
 
 <div class="row btn-row">
   <% if current_user.children.include?(@user) %>

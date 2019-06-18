@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
       i += 1
       until params[:group][:users][i].empty?
         @group.users << User.find(params[:group][:users][i])
-        if Group.find(@group_id).active
+        if Group.find(@group.id).active
           Relationship.find_by(user_id: params[:group][:users][i], group_id: @group.id).set_color
         end
         i += 1
@@ -64,7 +64,7 @@ class GroupsController < ApplicationController
       i += 1
       while i < params[:group][:users].size
         @group.users << User.find(params[:group][:users][i])
-        if Group.find(@group_id).active
+        if Group.find(@group.id).active
           Relationship.find_by(user_id: params[:group][:users][i], group_id: @group.id).set_color
         end
         i += 1

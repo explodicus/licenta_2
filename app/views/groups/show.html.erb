@@ -106,7 +106,7 @@
     <div class="form-group row">
       <%= f.label :week_day, t('Week day'), class:"col-sm-2 col-form-label" %>
       <div class="col-sm-2">
-        <%= f.select :week_day, Array(1..6).collect { |i| [t(:"date.day_names")[i].capitalize, i + 1] }, {}, class: 'custom-select' %>
+        <%= f.select :week_day, Array(1..6).collect { |i| [t(:"date.day_names")[i].capitalize, i] }, {}, class: 'custom-select' %>
       </div>
       <%= f.label :start_time, t('Start time'), class:"col-sm-2 col-form-label" %>
       <div class="col-sm-2">

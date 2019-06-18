@@ -16,6 +16,10 @@ class UserPolicy < ApplicationPolicy
     @user&.admin?
   end
 
+  def timetable?
+    user && (@user.admin? || @record == @user || (@user.parent? && @user.children.include?(@record) && @record.admin_confirmed))
+  end
+
   def pending_approval?
     @user&.admin?
   end

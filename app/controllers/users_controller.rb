@@ -57,6 +57,10 @@ class UsersController < ApplicationController
     redirect_to @user
   end
 
+  def timetable
+    authorize @user
+  end
+
   def approve
     authorize @user
     @user.admin_confirmed = true

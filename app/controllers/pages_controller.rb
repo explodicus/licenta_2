@@ -35,6 +35,4 @@ class PagesController < ApplicationController
   def spain; end
 
   def study_abroad; end
-
-  def timetable; end
 end

@@ -28,5 +28,5 @@
   <% if current_user.has_role? :student %>
     <%= render 'shared/student_aside' %>
   <% end %>
-  <h5 class="title"><%= link_to t("Timetable"), timetable_path %></h5>
+  <h5 class="title"><%= link_to t("Timetable"), timetable_user_path(current_user) %></h5>
 </div>
