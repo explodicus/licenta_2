@@ -214,10 +214,6 @@ table {
   }
 }
 
-img {
-  margin: 10px 0;
-}
-
 .page-link {
   color: $accent-color
 }
@@ -266,4 +262,8 @@ form {
 
 b {
   color: $accent-color;
+}
+
+.alert {
+  margin: 0;
 }
