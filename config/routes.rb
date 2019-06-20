@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get 'performance' => 'pages#performance'
     get 'weekend_school' => 'pages#weekend_school'
     get 'vacation_school' => 'pages#vacation_school'
-    get 'getting_ready_for_school' => 'pages#getting_ready'
+    get 'workshop' => 'pages#workshop'
     get 'international_camps' => 'pages#international_camps'
     get 'uk' => 'pages#uk'
     get 'germany' => 'pages#germany'

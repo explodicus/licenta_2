@@ -22,7 +22,7 @@ class PagesController < ApplicationController
 
   def vacation_school; end
 
-  def getting_ready; end
+  def workshop; end
 
   def international_camps; end
 

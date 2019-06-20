@@ -192,7 +192,23 @@ table {
   }
 }
 
+.static {
+  margin: auto 0;
+}
+
+.static-accademic {
+  margin: 0 0 1rem 0;
+}
+
 @media only screen and (max-width: 575px) {
+  .static {
+    margin: 0 0 1rem 0;
+  }
+
+  .static-accademic {
+    margin: 1rem 0 0 0;
+  }
+
   #content {
     padding-bottom: 124px;
   }
@@ -266,4 +282,22 @@ b {
 
 .alert {
   margin: 0;
+}
+
+p {
+  text-align: justify;
+}
+
+.img-static {
+  border-radius: 10px;
+}
+
+.img-hidden {
+  display: none;
+}
+
+@media only screen and (max-width: 990px) {
+  .img-hidden {
+    display: block;
+  }
 }
