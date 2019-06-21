@@ -71,6 +71,14 @@ class UsersController < ApplicationController
     else
       UserMailer.account_confirmation(@user).deliver_now
     end
+    flash[:success] = t('The user was accepted')
+    redirect_to pending_approval_users_path
+  end
+
+  def reject
+    authorize @user
+    @user.destroy
+    flash[:success] = t('The user was rejected')
     redirect_to pending_approval_users_path
   end
 

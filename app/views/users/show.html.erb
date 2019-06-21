@@ -42,13 +42,14 @@
 
 <div class="row btn-row">
   <% if current_user.children.include?(@user) %>
-      <%= link_to t("Make full account"), new_full_child_path(@user), class: "btn btn-primary col-sm-2" %>
-      <%= link_to t("Edit account"), edit_child_path(@user), class: "btn btn-primary col-sm-2" %>
+    <%= link_to t("Make full account"), new_full_child_path(@user), class: "btn btn-primary col-sm-2" %>
+    <%= link_to t("Edit account"), edit_child_path(@user), class: "btn btn-primary col-sm-2" %>
   <% end %>
 
   <% if current_user.admin? %>
     <% if !@user.admin_confirmed %>
-        <%= link_to t("Approve account"), approve_user_path(@user), class: "btn btn-primary col-sm-2" %>
+      <%= link_to t("Approve account"), approve_user_path(@user), class: "btn btn-primary col-sm-2" %>
+      <%= link_to t("Reject account"), reject_user_path(@user), data: {confirm: t("Are you sure you want to reject this account?")}, class: "btn btn-danger col-sm-2" %>
     <% elsif !@user.child? %>
       <% if (@user.admin?) && (current_user != @user) %>
         <%= link_to t("Remove admin"), remove_admin_user_path, class: "btn btn-danger col-sm-2" %>

@@ -1,21 +1,34 @@
 <div class="col-sm-4 sidebar">
   <div class="btn-group dropright">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Notifications
+      <%= t('Notifications') %>
       <% if current_user.notifications.where(read: false).count > 0 %>
         <span class="badge badge-light"><%= current_user.notifications.where(read: false).count %></span>
       <% end %>
     </button>
     <div class="dropdown-menu overflow-auto notifications" aria-labelledby="dropdownMenuButton">
-      <% current_user.notifications.each do |notification| %>
-        <%= link_to notification.title, notification, class: if notification.read
-                                                               'dropdown-item'
-                                                             else
-                                                               'dropdown-item bold'
-                                                             end %>
+      <% if current_user.notifications.count == 0 %>
+        <p class="dropdown-item" ><%= t('No notifications') %></p>
+      <% end %>
+      <% current_user.notifications.order(created_at: :desc).all.each do |notification| %>
+        <% if notification.title.include?('New post: ') || notification.title.include?('Postare nouă: ') || notification.title.include?('Новый пост: ') %>
+          <%= link_to notification.title, Post.find(notification.content.to_i), class: if notification.read
+                                                                                         'dropdown-item'
+                                                                                       else
+                                                                                         'dropdown-item bold'
+                                                                                       end %>
+        <% else %>
+          <%= link_to notification.title, notification, class: if notification.read
+                                                                 'dropdown-item'
+                                                               else
+                                                                 'dropdown-item bold'
+                                                               end %>
+        <% end %>
       <% end %>
     </div>
   </div>
+  <br>
+  <br>
   <% if current_user.has_role? :admin %>
     <%= render 'shared/admin_aside' %>
   <% end %>

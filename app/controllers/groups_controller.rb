@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
           Relationship.find_by(user_id: user, group_id: @group.id).set_color
         end
       end
-      flash[:success] = 'Group was successfully created'
+      flash[:success] = t('The group was succesfully created')
       redirect_to @group
     else
       render 'new'
@@ -77,9 +77,9 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    @group.destroy
     authorize @group
-    flash[:success] = 'Group deleted'
+    @group.destroy
+    flash[:success] = t('The group was succesfully deleted')
     redirect_to groups_url
   end
 

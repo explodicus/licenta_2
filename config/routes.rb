@@ -54,6 +54,7 @@ Rails.application.routes.draw do
         get 'make_editor'
         get 'remove_editor'
         get 'approve'
+        get 'reject'
         get 'sign_sb_in'
         get 'set_discount'
         put 'update_discount'

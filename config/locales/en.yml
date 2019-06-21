@@ -202,3 +202,12 @@ en:
   We'll try to fix this problem as soon as possible, but if the problem persists, feel free to contact us: "We'll try to fix this problem as soon as possible, but if the problem persists feel free to contact us."
   You don't seem to have access to view this page Please log in as a different user to see it: "You don't seem to have access to view this page. Please log in as a different user to see it."
   Home: 'Home'
+  Reject account: 'Reject account'
+  Are you sure you want to reject this account?: 'Are you sure you want to reject this account?'
+  The user was accepted: 'The user was accepted'
+  The user was rejected: 'The user was rejected'
+  The group was successfully deleted: 'The group was successfully deleted'
+  The group was successfully created: 'The group was successfully created'
+  Notifications for: 'Notifications for'
+  Notifications: 'Notifications'
+  No notifications: 'No notifications'
