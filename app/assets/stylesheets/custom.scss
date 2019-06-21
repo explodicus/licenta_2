@@ -21,7 +21,7 @@ body{
 }
 
 #content {
-  padding-bottom: 84px;
+  padding-bottom: 100px;
 }
 
 .navbar {
@@ -42,20 +42,6 @@ body{
   left: inherit;
 }
 
-@media only screen and (max-width: 767px) {
-  .navbar {
-    padding-bottom: 0.5rem;
-    text-align: center;
-  }
-
-  .dropdown-menu {
-    border: 0;
-    background-color: white !important;
-    border-radius: 0.25rem;
-    text-align: center;
-  }
-}
-
 .inner-headline {
   background-color: $strip-color;
   color: white;
@@ -67,17 +53,13 @@ h2 {
   font-size: 42px;
 }
 
-#content {
-  padding-bottom: 100px;
-}
-
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 90px;
   background-color: $strip-color;
-  margin-top: 45px;
+  margin-top: 0;
   padding-top: 10px;
   a {
     color: silver;
@@ -200,36 +182,6 @@ table {
   margin: 0 0 1rem 0;
 }
 
-@media only screen and (max-width: 575px) {
-  .static {
-    margin: 0 0 1rem 0;
-  }
-
-  .static-accademic {
-    margin: 1rem 0 0 0;
-  }
-
-  #content {
-    padding-bottom: 124px;
-  }
-  footer {
-    height: 114px;
-    ul {
-      display: table;
-      padding: 0;
-      margin: 0 auto;
-    }
-    .right {
-      float: none;
-    }
-  }
-  .btn-row {
-    .btn {
-      margin: 5px 0;
-    }
-  }
-}
-
 .page-link {
   color: $accent-color
 }
@@ -299,5 +251,65 @@ p {
 @media only screen and (max-width: 990px) {
   .img-hidden {
     display: block;
+  }
+
+  #content {
+    padding-bottom: 114px;
+  }
+
+  footer {
+    height: 104px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #content {
+    padding-bottom: 138px;
+  }
+
+  footer {
+    height: 128px;
+  }
+
+  .navbar {
+    padding-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .dropdown-menu {
+    border: 0;
+    background-color: white !important;
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .static {
+    margin: 0 0 1rem 0;
+  }
+
+  .static-accademic {
+    margin: 1rem 0 0 0;
+  }
+
+  #content {
+    padding-bottom: 154px;
+  }
+  footer {
+    height: 144px;
+    ul {
+      display: table;
+      padding: 0;
+      margin: 0 auto;
+    }
+    .right {
+      float: none;
+    }
+  }
+  .btn-row {
+    .btn {
+      margin: 5px 0;
+    }
   }
 }
