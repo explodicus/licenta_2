@@ -10,9 +10,11 @@
         <p><%= line %></p>
       <% end %>
     </div>
-    <div class="row btn-row">
-      <%= link_to t("Edit post"), edit_post_path(@post), class: "btn btn-light col-sm-4" if policy(@post).edit? %>
-      <%= link_to t("Delete post"), @post, method: :delete, data: {confirm: t("Are you sure you want to delete this post?")}, class: "btn btn-danger col-sm-4" if policy(@post).destroy? %>
-    </div>
+    <% if current_user.admin? || @post.user == current_user %>
+      <div class="row btn-row">
+        <%= link_to t("Edit post"), edit_post_path(@post), class: "btn btn-light col-sm-4" if policy(@post).edit? %>
+        <%= link_to t("Delete post"), @post, method: :delete, data: {confirm: t("Are you sure you want to delete this post?")}, class: "btn btn-danger col-sm-4" if policy(@post).destroy? %>
+      </div>
+    <% end %>
   </div>
 </div>

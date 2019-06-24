@@ -6,6 +6,14 @@ class NotificationsController < ApplicationController
     authorize @notification
     @notification.read = true
     @notification.save
+    if @notification.title.include?('New post: ') || @notification.title.include?('Postare nouă: ') || @notification.title.include?('Новый пост: ')
+      if Post.exists?(@notification.content.to_i)
+        redirect_to Post.find(@notification.content.to_i)
+      else
+        @notification.destroy
+        redirect_to root_path
+      end
+    end
   end
 
   def new

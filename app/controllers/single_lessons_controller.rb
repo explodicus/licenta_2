@@ -12,6 +12,12 @@ class SingleLessonsController < ApplicationController
       return
     end
 
+    if @single_lesson.start_date_time > @single_lesson.group.expiration_date
+      flash[:danger] = t("A lesson can't be scheduled after the group's expiration date")
+      redirect_to @single_lesson.group
+      return
+    end
+
     @single_lesson.group.users.each do |user|
       user.groups.each do |group|
         group.single_lessons.each do |lesson|

@@ -215,3 +215,5 @@ ro:
   Vacation deleted: 'Vacanța a fost ștearsă cu succes'
   Currently waiting confirmation for: 'Momentan se așteaptă confirmarea pentru: '
   Leave blank if you don't want to change it: 'Lăsați necompletat dacă nu doriți să o schimbați'
+  A lesson can't be scheduled after the group's expiration date: 'Nu puteți programa o lecție după data expirării a grupului'
+  Expiration date: 'Data expirării'

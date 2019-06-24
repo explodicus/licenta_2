@@ -21,23 +21,25 @@ class PostsController < ApplicationController
     authorize @post
     if @post.save
       user_ids = Set.new
-      params[:groups].each do |group_id|
-        Group.find(group_id).users.each do |user|
-          user_ids.add(user.id)
+      if params[:groups]
+        params[:groups].each do |group_id|
+          Group.find(group_id).users.each do |user|
+            user_ids.add(user.id)
+          end
         end
-      end
-      user_ids.each do |user_id|
-        user = User.find(user_id)
-        if user.preferred_language == 'Romanian'
-          @notification = user.notifications.build(title: "Postare nouă: #{@post.title}", content: @post.id.to_s, read: false)
-          @notification.save
-        elsif user.preferred_language == 'English'
-          @notification = user.notifications.build(title: "New post: #{@post.title}", content: @post.id.to_s, read: false)
-          @notification.save
-        elsif user.preferred_language == 'Russian'
-          @notification = user.notifications.build(title: "Новый пост: #{@post.title}", content: @post.id.to_s, read: false)
-          @notification.save
+        user_ids.each do |user_id|
+          user = User.find(user_id)
+          if user.preferred_language == 'Romanian'
+            @notification = user.notifications.build(title: "Postare nouă: #{@post.title}", content: @post.id.to_s, read: false)
+            @notification.save
+          elsif user.preferred_language == 'English'
+            @notification = user.notifications.build(title: "New post: #{@post.title}", content: @post.id.to_s, read: false)
+            @notification.save
+          elsif user.preferred_language == 'Russian'
+            @notification = user.notifications.build(title: "Новый пост: #{@post.title}", content: @post.id.to_s, read: false)
+            @notification.save
 
+          end
         end
       end
       flash[:success] = t('Post was successfully created')

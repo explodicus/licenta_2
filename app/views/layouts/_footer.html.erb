@@ -4,13 +4,13 @@
       <div class="col-sm-4">
         <ul>
           <li>
-            <%= link_to raw('<span class="flag-icon flag-icon-ro"></span>'), url_for(locale: :ro) %>
+            <%= link_to raw('<span class="flag-icon flag-icon-ro"></span>'), url_for(locale: :ro), data: { turbolinks: false } %>
           </li>
           <li>
-            <%= link_to raw('<span class="flag-icon flag-icon-ru"></span>'), url_for(locale: :ru) %>
+            <%= link_to raw('<span class="flag-icon flag-icon-ru"></span>'), url_for(locale: :ru), data: { turbolinks: false } %>
           </li>
           <li>
-            <%= link_to raw('<span class="flag-icon flag-icon-gb"></span>'), url_for(locale: :en) %>
+            <%= link_to raw('<span class="flag-icon flag-icon-gb"></span>'), url_for(locale: :en), data: { turbolinks: false } %>
           </li>
         </ul>
       </div>

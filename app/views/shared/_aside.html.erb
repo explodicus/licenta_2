@@ -11,19 +11,11 @@
         <p class="dropdown-item" ><%= t('No notifications') %></p>
       <% end %>
       <% current_user.notifications.order(created_at: :desc).all.each do |notification| %>
-        <% if notification.title.include?('New post: ') || notification.title.include?('Postare nouă: ') || notification.title.include?('Новый пост: ') %>
-          <%= link_to notification.title, Post.find(notification.content.to_i), class: if notification.read
-                                                                                         'dropdown-item'
-                                                                                       else
-                                                                                         'dropdown-item bold'
-                                                                                       end %>
-        <% else %>
-          <%= link_to notification.title, notification, class: if notification.read
-                                                                 'dropdown-item'
-                                                               else
-                                                                 'dropdown-item bold'
-                                                               end %>
-        <% end %>
+        <%= link_to notification.title, notification, class: if notification.read
+                                                               'dropdown-item'
+                                                             else
+                                                               'dropdown-item bold'
+                                                             end %>
       <% end %>
     </div>
   </div>

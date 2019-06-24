@@ -1,4 +1,4 @@
-<h5 class="title"><%= link_to t("Groups"), groups_path %></h5>
+<h5 class="title"><%= link_to t("Groups"), groups_path, data: { turbolinks: false } %></h5>
 <ul>
   <li>
     <i class="material-icons">
@@ -14,25 +14,25 @@
     <i class="material-icons">
       navigate_next
     </i>
-    <%= link_to t("Teachers"), teachers_users_path %>
+    <%= link_to t("Teachers"), teachers_users_path, data: { turbolinks: false } %>
   </li>
   <li>
     <i class="material-icons">
       navigate_next
     </i>
-    <%= link_to t("Students"), students_users_path %>
+    <%= link_to t("Students"), students_users_path, data: { turbolinks: false } %>
   </li>
   <% if User.where('admin_confirmed = false AND (confirmed_at IS NOT NULL OR parent_id IS NOT NULL)').count > 0 %>
     <li>
       <i class="material-icons">
         navigate_next
       </i>
-      <%= link_to t("Pending approval"), pending_approval_users_path %>
+      <%= link_to t("Pending approval"), pending_approval_users_path, data: { turbolinks: false } %>
     </li>
   <% end %>
 </ul>
 
-<h5 class="title"><%= link_to t("Vacations"), vacations_path %></h5>
+<h5 class="title"><%= link_to t("Vacations"), vacations_path, data: { turbolinks: false } %></h5>
 <ul>
   <li>
     <i class="material-icons">

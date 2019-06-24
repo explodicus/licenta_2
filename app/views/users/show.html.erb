@@ -69,11 +69,11 @@
       <%= link_to t("Set discount"), set_discount_user_path(@user), class: "btn btn-primary col-sm-2" %>
       <div class="col-sm-1"></div>
       <% if @user.teacher? %>
-        <%= link_to t("Teachers"), teachers_users_path, class: "btn btn-light col-sm-2" %>
+        <%= link_to t("Teachers"), teachers_users_path, class: "btn btn-light col-sm-2", data: { turbolinks: false } %>
       <% elsif @user.student? %>
-        <%= link_to t("Students"), students_users_path, class: "btn btn-light col-sm-2" %>
+        <%= link_to t("Students"), students_users_path, class: "btn btn-light col-sm-2", data: { turbolinks: false } %>
       <% else %>
-        <%= link_to t("Pending approval"), pending_approval_users_path, class: "btn btn-light col-sm-2" %>
+        <%= link_to t("Pending approval"), pending_approval_users_path, class: "btn btn-light col-sm-2", data: { turbolinks: false } %>
       <% end %>
     <% end %>
   <% end %>

@@ -13,8 +13,13 @@
 </div>
 
 <div class="row">
-  <h5 class="col-sm-3"><%= t('Last update') %></h5>
-  <div class="col-sm-3"><%= @group.updated_at.strftime("%H:%M %d.%m.%Y") %></div>
+  <% if @group.expiration_date %>
+    <h5 class="col-sm-3"><%= t('Expiration date') %></h5>
+    <div class="col-sm-3"><%= @group.expiration_date.strftime("%d.%m.%Y") %></div>
+  <% else %>
+    <h5 class="col-sm-3"><%= t('Last update') %></h5>
+    <div class="col-sm-3"><%= @group.updated_at.strftime("%H:%M %d.%m.%Y") %></div>
+  <% end %>
   <h5 class="col-sm-3"><%= t('Created on') %></h5>
   <div class="col-sm-3"><%= @group.created_at.strftime("%d.%m.%Y") %></div>
 </div>
@@ -154,6 +159,6 @@
       <%= link_to t("Edit group"), edit_group_path(@group), class: "btn btn-light col-sm-2" %>
       <%= link_to t("Delete group"), @group, method: :delete, data: {confirm: t("Are you sure you want to delete this group?")}, class: "btn btn-danger col-sm-2" %>
       <div class="col-sm-5"></div>
-      <%= link_to t("All groups"), groups_path, class: "btn btn-light btn-right col-sm-2" %>
+      <%= link_to t("All groups"), groups_path, class: "btn btn-light btn-right col-sm-2", data: { turbolinks: false } %>
   </div>
 <% end %>
