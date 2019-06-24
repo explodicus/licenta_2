@@ -19,24 +19,22 @@ class NotificationsController < ApplicationController
       @notification = user.notifications.build(notification_params)
       authorize @notification
       @notification.read = false
-      if @notification.save
-        flash[:success] = t('Message was successfully sent')
-        redirect_to root_path
-        return
-      else
+      unless @notification.save
         render 'new'
         return
       end
     end
+    flash[:success] = t('Message was successfully sent')
+    redirect_to root_path
   end
 
   private
 
-    def notification_params
-      params.require(:notification).permit(:title, :content)
-    end
+  def notification_params
+    params.require(:notification).permit(:title, :content)
+  end
 
-    def set_notification
-      @notification = Notification.find(params[:id])
-    end
+  def set_notification
+    @notification = Notification.find(params[:id])
+  end
 end

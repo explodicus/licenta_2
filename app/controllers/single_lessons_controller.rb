@@ -16,7 +16,7 @@ class SingleLessonsController < ApplicationController
       user.groups.each do |group|
         group.single_lessons.each do |lesson|
           next unless (@single_lesson.start_date_time..@single_lesson.end_date_time).overlaps?(lesson.start_date_time..lesson.end_date_time)
-          flash[:danger] = "Overlap found with #{user.full_name}'s timetable in group #{group.name}"
+          flash[:danger] = t("Overlap found with") + user.full_name + t('s timetable in group') + group.name
           redirect_to @single_lesson.group
           return
         end
@@ -47,9 +47,10 @@ class SingleLessonsController < ApplicationController
   end
 
   def destroy
-    @group = @lesson.group
-    @lesson.destroy
-    authorize @lesson
+    @single_lesson = SingleLesson.find(params[:id])
+    authorize @single_lesson
+    @group = @single_lesson.group
+    @single_lesson.destroy
     flash[:success] = t('Lesson deleted')
     redirect_to @group
   end

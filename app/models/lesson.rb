@@ -24,6 +24,7 @@ class Lesson < ApplicationRecord
     single_lesson.start_date_time = self.start_datetime + (week_day - Date.today.wday).day
     single_lesson.end_date_time = self.end_datetime + (week_day - Date.today.wday).day
     single_lesson.group_id = group_id
+    single_lesson.id = self.id
     return single_lesson
   end
 

@@ -38,8 +38,5 @@
   <% if (current_user.has_role? :parent) && current_user.has_confirmed_children? %>
     <%= render 'shared/parent_aside' %>
   <% end %>
-  <% if current_user.has_role? :student %>
-    <%= render 'shared/student_aside' %>
-  <% end %>
   <h5 class="title"><%= link_to t("Timetable"), timetable_user_path(current_user) %></h5>
 </div>

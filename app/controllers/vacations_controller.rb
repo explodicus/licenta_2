@@ -20,7 +20,7 @@ class VacationsController < ApplicationController
     @vacation = Vacation.new(vacation_params)
     authorize @vacation
     if @vacation.save
-      flash[:success] = 'Vacation was successfully created'
+      flash[:success] = t('Vacation was successfully created')
       redirect_to vacations_url
     else
       render 'new'
@@ -34,7 +34,7 @@ class VacationsController < ApplicationController
   def update
     authorize @vacation
     if @vacation.update_attributes(vacation_params)
-      flash[:success] = 'Vacation updated'
+      flash[:success] = t('Vacation updated')
       redirect_to vacations_url
     else
       render 'edit'
@@ -44,7 +44,7 @@ class VacationsController < ApplicationController
   def destroy
     @vacation.destroy
     authorize @vacation
-    flash[:success] = 'Vacation deleted'
+    flash[:success] = t('Vacation deleted')
     redirect_to vacations_url
   end
 

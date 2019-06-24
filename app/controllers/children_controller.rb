@@ -57,7 +57,7 @@ class ChildrenController < ApplicationController
     end
     @user.parent_id = nil
     if @user.update_attributes(user_params_full)
-      flash[:success] = t('Full account created. To start using it, please follow the instructions sent to your email.')
+      flash[:success] = t('Full account created To start using it, please follow the instructions sent to your email')
       @user.save
       redirect_to root_url
     else

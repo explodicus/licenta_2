@@ -54,7 +54,7 @@ class PostsController < ApplicationController
   def update
     authorize @post
     if @post.update_attributes(post_params)
-      flash[:success] = 'Post updated'
+      flash[:success] = t('Post updated')
       redirect_to @post
     end
   end
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     authorize @post
-    flash[:success] = 'Post deleted'
+    flash[:success] = t('Post deleted')
     redirect_to posts_url
   end
 

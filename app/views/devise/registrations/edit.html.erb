@@ -6,14 +6,14 @@
   <div class="form-group row">
     <%= f.label :first_name, class:"col-sm-3 col-form-label" %>
     <div class="col-sm-9">
-      <%= f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: "First Name"%>
+      <%= f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: t("First Name") %>
     </div>
   </div>
 
   <div class="form-group row">
     <%= f.label :last_name, class:"col-sm-3 col-form-label"  %>
     <div class="col-sm-9">
-      <%= f.text_field :last_name, class: 'form-control', placeholder: "Last Name" %>
+      <%= f.text_field :last_name, class: 'form-control', placeholder: t("Last Name") %>
     </div>
   </div>
 
@@ -21,7 +21,7 @@
     <%= f.label :date_of_birth, class:"col-sm-3 col-form-label" %>
     <div class="col-sm-9">
       <%= f.date_select :date_of_birth, {order: [:day, :month, :year],
-                                         prompt: { day: 'Select day', month: 'Select month', year: 'Select year' },
+                                         prompt: { day: t('Select day'), month: t('Select month'), year: t('Select year') },
                                          start_year: Date.today.year - 5, end_year: Date.today.year - 100}, class: 'custom-select col-sm-3' %>
     </div>
   </div>
@@ -36,7 +36,7 @@
   <div class="form-group row">
     <%= f.label :preferred_language, class:"col-sm-3 col-form-label" %>
     <div class="col-sm-9">
-      <%= f.select :preferred_language, %w(Romanian Russian English), {}, class: 'custom-select' %>
+      <%= f.select :preferred_language, [[t('Romanian'), 'Romanian'], [t('Russian'), 'Russian'], [t('English'), 'English']], {}, class: 'custom-select' %>
     </div>
   </div>
 
@@ -48,20 +48,20 @@
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div><%= t('Currently waiting confirmation for') + resource.unconfirmed_email %></div>
   <% end %>
 
   <div class="form-group row">
     <%= f.label :password, class:"col-sm-3 col-form-label" %>
     <div class="col-sm-9">
-      <%= f.password_field :password, class: 'form-control', placeholder: "Leave blank if you don't want to change it", autocomplete: "new-password" %>
+      <%= f.password_field :password, class: 'form-control', placeholder: t("Leave blank if you don't want to change it"), autocomplete: "new-password" %>
     </div>
   </div>
 
   <div class="form-group row">
     <%= f.label :password_confirmation, class:"col-sm-3 col-form-label" %>
     <div class="col-sm-9">
-      <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Password confirmation",
+      <%= f.password_field :password_confirmation, class: 'form-control', placeholder: t("Password confirmation"),
                            autocomplete: "new-password" %>
     </div>
   </div>
@@ -71,10 +71,10 @@
   <div class="form-group row">
     <div class="col-sm-3">
       <%= f.label :current_password, class:"col-form-label" %><br>
-      <i>(we need your current password to confirm your changes)</i>
+      <i>(<%= t('we need your current password to confirm your changes') %>)</i>
     </div>
     <div class="col-sm-9">
-      <%= f.password_field :current_password, class: 'form-control', placeholder: "Current password",
+      <%= f.password_field :current_password, class: 'form-control', placeholder: t("Current password"),
                            autocomplete: "current-password" %>
     </div>
   </div>
@@ -82,15 +82,8 @@
   <br>
 
   <div class="actions">
-    <%= f.submit "Update", class:'btn btn-primary' %>
+    <%= f.submit t("Update"), class:'btn btn-primary' %>
   </div>
 <% end %>
-
-<br>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" },
-                          method: :delete, class: 'btn btn-secondary' %></p>
 
 <%= link_to "Back", :back %>

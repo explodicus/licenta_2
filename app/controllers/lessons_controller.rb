@@ -8,7 +8,7 @@ class LessonsController < ApplicationController
     @lesson.end_time = Time.new(2000, 1, 1, @lesson.end_time.hour, @lesson.end_time.min) - 1.minute
 
     if @lesson.start_time > @lesson.end_time
-      flash[:danger] = 'End time must be after start time'
+      flash[:danger] = t('End time must be after start time')
       redirect_to @lesson.group
       return
     end
@@ -17,7 +17,7 @@ class LessonsController < ApplicationController
       user.groups.each do |group|
         group.lessons.each do |lesson|
           if @lesson.week_day == lesson.week_day && (@lesson.start_time..@lesson.end_time).overlaps?(lesson.start_time..lesson.end_time)
-            flash[:danger] = "Overlap found with #{user.full_name}'s timetable in group #{group.name}"
+            flash[:danger] = t("Overlap found with") + user.full_name + t('s timetable in group') + group.name
             redirect_to @lesson.group
             return
           end
@@ -25,9 +25,9 @@ class LessonsController < ApplicationController
       end
     end
     if @lesson.save
-      flash[:success] = 'New lesson scheduled'
+      flash[:success] = t('New lesson scheduled')
     else
-      flash[:danger] = "Couldn't schedule lesson"
+      flash[:danger] = t("Couldn't schedule lesson")
     end
     redirect_to @lesson.group
   end
@@ -37,7 +37,7 @@ class LessonsController < ApplicationController
     authorize @lesson
     @group = @lesson.group
     @lesson.destroy
-    flash[:success] = 'Lesson deleted'
+    flash[:success] = t('Lesson deleted')
     redirect_to @group
   end
 
