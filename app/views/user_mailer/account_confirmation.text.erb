@@ -1,5 +1,5 @@
-Hi <%= @user.full_name %>,
+<%= t('Hello') + ' ' + @user.full_name %>,
 
-Your account was successfully reviewed by an administrator. You can now log in here:
+<%= t("Your account was successfully reviewed by an administrator You can now log in here") %>
 
-<%= new_user_session_url %>
+<%= new_user_session_url(locale: I18n.locale) %>

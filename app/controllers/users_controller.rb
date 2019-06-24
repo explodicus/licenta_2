@@ -66,11 +66,13 @@ class UsersController < ApplicationController
     @user.admin_confirmed = true
     @user.become_student
     @user.save
+    I18n.locale = @user.locale
     if (@user.child?)
       UserMailer.child_account_confirmation(@user.parent).deliver_now
     else
       UserMailer.account_confirmation(@user).deliver_now
     end
+    I18n.locale = current_user.locale
     flash[:success] = t('The user was accepted')
     redirect_to pending_approval_users_path
   end

@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     get 'spain' => 'pages#spain'
     get 'study_abroad' => 'pages#study_abroad'
 
-    devise_for :users, :controllers => {:sessions => "users/sessions"}
+    devise_for :users, :controllers => {:sessions => "users/sessions", :registrations => "users/registrations"}
 
     devise_scope :user do
       get '/users', to: 'devise/registrations#new'
