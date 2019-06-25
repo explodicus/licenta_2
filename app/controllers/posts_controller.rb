@@ -24,7 +24,11 @@ class PostsController < ApplicationController
       if params[:groups]
         params[:groups].each do |group_id|
           Group.find(group_id).users.each do |user|
-            user_ids.add(user.id)
+            if user.child?
+              user_ids.add(user.parent.id)
+            else
+              user_ids.add(user.id)
+            end
           end
         end
         user_ids.each do |user_id|

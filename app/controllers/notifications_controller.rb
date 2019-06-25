@@ -23,8 +23,16 @@ class NotificationsController < ApplicationController
 
   def create
     group = Group.find(params[:group_id])
+    user_ids = Set.new
     group.users.each do |user|
-      @notification = user.notifications.build(notification_params)
+      if user.child?
+        user_ids.add(user.parent.id)
+      else
+        user_ids.add(user.id)
+      end
+    end
+    user_ids.each do |user_id|
+      @notification = User.find(user_id).notifications.build(notification_params)
       authorize @notification
       @notification.read = false
       unless @notification.save
