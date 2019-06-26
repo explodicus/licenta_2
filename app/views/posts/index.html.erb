@@ -7,7 +7,9 @@
     <% @posts.each do |post| %>
     <article>
       <h4 class="title"><%=link_to post.title, post %></h4>
+      <br>
       <%=image_tag post.image.url, class: 'img-fluid', style: 'height: auto; width: 100%; display: block;' if post.image? %>
+      <br>
       <%= post.short_content %>
     </article>
       <br>
